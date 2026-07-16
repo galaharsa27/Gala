@@ -1,5 +1,20 @@
 .vercel
 .env*.local
+.env
+.env.*
+!.env.example
 node_modules
 .next
+dist
+build
+out
+coverage
+*.log
 *.zip
+
+# SHL local build/check artifacts
+release-shlcreative/check-*.png
+release-shlcreative/index.original.html
+release-shlcreative/vercel-deploy/dist/
+
+.vercel

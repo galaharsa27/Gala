@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "node build-static-public.js",
+    "vercel-build": "node build-static-public.js"
+  }
+}
