@@ -6,6 +6,7 @@ const deploy = path.join(root, "vercel-deploy");
 const output = path.join(deploy, ".vercel", "output", "static");
 const targets = [root, deploy, output];
 const shlInstagram = "https://www.instagram.com/shl.creative?igsh=MTcwcHpoNGtvb2ZiYg==";
+const socialPreviewImage = "https://shlcreative.com/assets/social-preview.jpg";
 const aboutSlides = [
   ["about-team-studio-wide.png", "SHL Creative Production team in studio"],
   ["about-team-action-truck.png", "SHL Creative Production action truck concept"],
@@ -194,13 +195,17 @@ function layout(page, body, lang = "id") {
   <meta property="og:title" content="${esc(page.title[lang])}">
   <meta property="og:description" content="${esc(desc)}">
   <meta property="og:url" content="${canonical}">
-  <meta property="og:image" content="https://shlcreative.com/assets/about-team-studio-wide.png">
+  <meta property="og:image" content="${socialPreviewImage}">
+  <meta property="og:image:secure_url" content="${socialPreviewImage}">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="${meta.locale}">
   <meta property="og:locale:alternate" content="${lang === "id" ? "en_US" : "id_ID"}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${esc(page.title[lang])}">
   <meta name="twitter:description" content="${esc(desc)}">
-  <meta name="twitter:image" content="https://shlcreative.com/assets/about-team-studio-wide.png">
+  <meta name="twitter:image" content="${socialPreviewImage}">
   <meta name="theme-color" content="#050505">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
