@@ -44,7 +44,7 @@
   </header>
 <main>
     <section class="hero">
-      <div class="hero-media"><iframe id="hero-video" src="https://www.youtube.com/embed/aAOPDXG4qBU?autoplay=1&mute=1&loop=1&playlist=aAOPDXG4qBU&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="hero-media"><iframe id="hero-video" data-videos="[&quot;aAOPDXG4qBU&quot;,&quot;HYix8fbR7yA&quot;]" src="https://www.youtube.com/embed/aAOPDXG4qBU?autoplay=1&mute=1&loop=1&playlist=aAOPDXG4qBU&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
       <div class="wrap hero-content">
         <div class="eyebrow">Autentik / Kreatif / Tak Lekang Waktu</div>
         <h1>SHL Creative<br><span class="script">Production</span></h1>
@@ -52,6 +52,11 @@
         <div class="hero-actions">
           <a class="btn" href="/portfolio/">Masuk Galeri</a>
           <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false" data-off="Suara Mati" data-on="Suara Hidup"><i></i><span>Suara Mati</span></button>
+          <div class="video-switch" aria-label="Pilih video pembuka">
+            <button type="button" data-video-step="-1" aria-label="Video sebelumnya">Prev</button>
+            <span id="video-label">Video 01</span>
+            <button type="button" data-video-step="1" aria-label="Video berikutnya">Next</button>
+          </div>
         </div>
       </div>
     </section>
