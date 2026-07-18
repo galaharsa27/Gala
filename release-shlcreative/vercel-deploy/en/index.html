@@ -63,8 +63,8 @@
   <div style="display:flex;align-items:center;gap:14px">
     <a class="pill-btn cine-cta-pill" href="/en/contact/"><span class="roll"><span data-label="Start a Project">Start a Project</span></span></a>
     <button class="cine-nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+      <span class="bars"><span></span><span></span></span>
       <small>MENU</small>
-      <span></span>
     </button>
   </div>
 </header>
@@ -85,168 +85,74 @@
 
 <main>
 
-  <section class="cine-hero" data-hero-scrub data-scene-slate="SCENE 01 — OPENING — INT. STUDIO">
-    <div class="hero-scrub-wrap">
-      <canvas id="hero-scrub-canvas"></canvas>
-    </div>
-    <div class="hero-poster">
-      <img src="/assets/gallery-ride-wide.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.6">
-      <button type="button" data-hero-play aria-label="Play video">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="#F4F3EF"/></svg>
-      </button>
-    </div>
+  <section class="cine-hero" data-scene-slate="SCENE 01 — OPENING — INT. STUDIO">
     <div class="hero-yt">
-      <iframe id="hero-video" data-videos="[&quot;HYix8fbR7yA&quot;,&quot;aAOPDXG4qBU&quot;]" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="hero-video" data-videos="[&quot;HYix8fbR7yA&quot;,&quot;aAOPDXG4qBU&quot;]" src="https://www.youtube.com/embed/HYix8fbR7yA?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=HYix8fbR7yA&amp;controls=0&amp;showinfo=0&amp;modestbranding=1&amp;rel=0&amp;playsinline=1&amp;disablekb=1&amp;enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="hero-content wrap">
       <div class="hero-slate"><i></i> Scene 01 — Opening</div>
       <h1>Stories made<br><em>with purpose.</em></h1>
       <p>PT Samasta Hitakara Lekha — a creative partner for video, photography, and brand work built with intent, not just content.</p>
       <div class="hero-actions">
-        <a class="pill-btn solid" href="#works" data-cursor="VIEW"><span class="roll"><span data-label="See the Work">See the Work</span></span></a>
-        <button class="link-arrow hero-full-link" type="button" data-hero-play>Watch in Full <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></button>
-        <button class="sound-fab on" type="button" data-sound-toggle aria-label="Video sound" aria-pressed="true"><i></i></button>
-        <button class="sound-fab" type="button" data-ambience-toggle aria-label="Studio ambience" hidden><i></i></button>
-      </div>
-    </div>
-  </section>
-
-  <section class="scene snap-screen" id="works" data-scene-slate="SCENE 02 — WORK — EXT. ROAD">
-    <div class="wrap">
-      <div class="scene-head">
-        <div>
-          <div class="scene-slate"><b>02</b> Work — Ext. Road</div>
-          <h2>Work that speaks<br><em>for itself.</em></h2>
+        <a class="pill-btn solid" href="/en/contact/"><span class="roll"><span data-label="Start a Project">Start a Project</span></span></a>
+        <button class="sound-fab" type="button" data-sound-toggle aria-label="Video sound" aria-pressed="false"><i></i></button>
+        <div class="video-switch" aria-label="Choose opening video">
+          <button type="button" data-hero-video-step="-1" aria-label="Previous video">&#8592;</button>
+          <span data-hero-video-label>Video 01</span>
+          <button type="button" data-hero-video-step="1" aria-label="Next video">&#8594;</button>
         </div>
-        <p class="scene-lead">A selection of stories we've completed with clients — documentation, automotive, stage, and portraiture.</p>
       </div>
-
-      <div class="works-grid" data-idle-breathe>
-        <a class="work-tile develop c-8 r-wide" href="/en/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-ride-wide.jpg" alt="Motorcycle convoy on the road" loading="lazy"><span class="work-cap"><strong>Road Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-4 r-tall" href="/en/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-landcruiser-color.jpg" alt="Land Cruiser in motion" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-4 r-tall" href="/en/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-rider-portrait.jpg" alt="Rider portrait in the woods" loading="lazy"><span class="work-cap"><strong>Portrait</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-8 r-wide" href="/en/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-custom-bike-blue.jpg" alt="Custom motorcycle detail" loading="lazy"><span class="work-cap"><strong>Custom Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-6 r-wide" href="/en/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-camp-chopper.jpg" alt="Chopper in a forest camp" loading="lazy"><span class="work-cap"><strong>Lifestyle</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-6 r-tall" href="/en/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-wrx-blue.jpg" alt="Blue WRX detail" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-      </div>
-
-      <div class="drag-strip" data-idle-breathe>
-        <a class="work-tile develop" href="/en/portfolio/"><img src="/assets/gallery-ride-wide.jpg" alt="Motorcycle convoy on the road" loading="lazy"><span class="work-cap"><strong>Road Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/en/portfolio/"><img src="/assets/gallery-landcruiser-color.jpg" alt="Land Cruiser in motion" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/en/portfolio/"><img src="/assets/gallery-rider-portrait.jpg" alt="Rider portrait in the woods" loading="lazy"><span class="work-cap"><strong>Portrait</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/en/portfolio/"><img src="/assets/gallery-custom-bike-blue.jpg" alt="Custom motorcycle detail" loading="lazy"><span class="work-cap"><strong>Custom Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/en/portfolio/"><img src="/assets/gallery-camp-chopper.jpg" alt="Chopper in a forest camp" loading="lazy"><span class="work-cap"><strong>Lifestyle</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/en/portfolio/"><img src="/assets/gallery-wrx-blue.jpg" alt="Blue WRX detail" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-      </div>
-
-      <div style="margin-top:34px"><a class="link-arrow" href="/en/portfolio/">View Full Portfolio <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a></div>
     </div>
   </section>
 
-  <section class="scene alt snap-screen" data-scene-slate="SCENE 03 — SERVICES — INT. STUDIO">
+  <section class="scene alt snap-screen" data-scene-slate="SCENE 02 — SERVICES — INT. STUDIO">
     <div class="wrap">
       <div class="scene-head">
         <div>
-          <div class="scene-slate"><b>03</b> Services — Int. Studio</div>
+          <div class="scene-slate"><b>02</b> Services — Int. Studio</div>
           <h2>Storytelling,<br><em>start to finish.</em></h2>
         </div>
-        <p class="scene-lead">Six core disciplines that take a brand from idea to screen.</p>
       </div>
-      <div class="svc-list">
-        <a class="svc-row" href="/en/services/" data-sheet-open="Creative Direction" data-sheet-body="Concept, art direction, and visual language for the whole brand.">
-          <small>01</small>
-          <div><strong>Creative Direction</strong><span>Concept, art direction, and visual language for the whole brand.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/en/services/" data-sheet-open="Commercial Video Production" data-sheet-body="Ads, brand films, and product cinema from concept to final delivery.">
-          <small>02</small>
-          <div><strong>Commercial Video Production</strong><span>Ads, brand films, and product cinema from concept to final delivery.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/en/services/" data-sheet-open="Photography" data-sheet-body="Campaign, product, corporate, editorial, and documentation photography.">
-          <small>03</small>
-          <div><strong>Photography</strong><span>Campaign, product, corporate, editorial, and documentation photography.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/en/services/" data-sheet-open="Brand Identity" data-sheet-body="Logo, visual system, brand guidelines, and communication style.">
-          <small>04</small>
-          <div><strong>Brand Identity</strong><span>Logo, visual system, brand guidelines, and communication style.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/en/services/" data-sheet-open="Corporate Branding" data-sheet-body="Corporate identity built to be trusted and easy to recognize.">
-          <small>05</small>
-          <div><strong>Corporate Branding</strong><span>Corporate identity built to be trusted and easy to recognize.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/en/services/" data-sheet-open="Personal Branding" data-sheet-body="Positioning and content for founders, professionals, and public figures.">
-          <small>06</small>
-          <div><strong>Personal Branding</strong><span>Positioning and content for founders, professionals, and public figures.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div style="margin-top:34px"><a class="link-arrow" href="/en/services/">View All Services <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a></div>
+      <p class="scene-lead" style="max-width:760px;font-size:17px;line-height:1.85">We start with creative direction and concept, then bring it to life through commercial video production and photography made to a professional standard. It's all tied together in one consistent brand identity — for companies and individuals alike — so every story we make truly represents who you are.</p>
+      <div style="margin-top:30px"><a class="link-arrow" href="/en/services/">View All Services <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a></div>
     </div>
   </section>
 
-  <section class="scene snap-screen" data-scene-slate="SCENE 04 — LEADERSHIP — INT. STUDIO">
+  <section class="scene snap-screen" data-scene-slate="SCENE 03 — LEADERSHIP — INT. STUDIO">
     <div class="wrap">
       <div class="scene-head">
         <div>
-          <div class="scene-slate"><b>04</b> Leadership — Int. Studio</div>
+          <div class="scene-slate"><b>03</b> Leadership — Int. Studio</div>
           <h2>The people<br><em>behind the ecosystem.</em></h2>
         </div>
       </div>
 
-      <div class="lead-carousel" data-lead-carousel>
-        <div class="lead-viewport">
-          <div class="lead-track" data-lead-track>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-galang.jpg" alt="Galang Kharisma Rizki" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Director</em>
-                <h3>Galang Kharisma Rizki</h3>
-                <p>Leads company vision, creative direction, strategic partnerships, innovation, and business development.</p>
-                <a class="link-arrow" href="https://www.instagram.com/galaharsa.sh1/" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a>
-              </div>
-            </div>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-deni.jpg" alt="Deni Surachmat" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Finance Manager</em>
-                <h3>Deni Surachmat</h3>
-                <p>Responsible for financial planning, budgeting, cash flow, accounting, and company sustainability.</p>
-                <a class="link-arrow" href="https://www.instagram.com/denisurachmat/" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a>
-              </div>
-            </div>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-amir.jpg" alt="Amir Maulana" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Operations Manager</em>
-                <h3>Amir Maulana</h3>
-                <p>Responsible for production flow, scheduling, execution, logistics, quality assurance, and operations.</p>
-              </div>
-            </div>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-uta.jpg" alt="Frisardi Ramadhana (Uta)" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Creative Communications Manager</em>
-                <h3>Frisardi Ramadhana (Uta)</h3>
-                <p>Develops communication strategy, creative concepts, brand narrative, and production content.</p>
-                <a class="link-arrow" href="https://www.instagram.com/utautinn?igsh=MW55ZDlqdG8xanpjaA==" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a>
-              </div>
-            </div>
-          </div>
+      <div class="lead-grid">
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-galang.jpg" alt="Galang Kharisma Rizki" loading="lazy"></div>
+          <h3>Galang Kharisma Rizki</h3>
+          <em>Director</em>
         </div>
-        <div class="lead-controls">
-          <button class="lead-nav" type="button" data-lead-step="-1" aria-label="Previous leader">&#8592;</button>
-          <div class="lead-progress"><i data-lead-progress></i></div>
-          <button class="lead-nav" type="button" data-lead-step="1" aria-label="Next leader">&#8594;</button>
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-deni.jpg" alt="Deni Surachmat" loading="lazy"></div>
+          <h3>Deni Surachmat</h3>
+          <em>Finance Manager</em>
+        </div>
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-amir.jpg" alt="Amir Maulana" loading="lazy"></div>
+          <h3>Amir Maulana</h3>
+          <em>Operations Manager</em>
+        </div>
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-uta.jpg" alt="Frisardi Ramadhana (Uta)" loading="lazy"></div>
+          <h3>Frisardi Ramadhana (Uta)</h3>
+          <em>Creative Communications Manager</em>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="scene alt" data-scene-slate="SCENE 05 — CREDIBILITY">
+  <section class="scene alt" data-scene-slate="SCENE 04 — CREDIBILITY">
     <div class="wrap">
       <div class="trust-strip">
         <div><b>14</b><span>Integrated Services</span></div>
@@ -256,9 +162,9 @@
     </div>
   </section>
 
-  <section class="scene snap-screen" data-scene-slate="SCENE 06 — START — EXT. NEXT">
+  <section class="scene snap-screen" data-scene-slate="SCENE 05 — START — EXT. NEXT">
     <div class="wrap close-cta">
-      <div class="scene-slate"><b>06</b> Start — Ext. Next</div>
+      <div class="scene-slate"><b>05</b> Start — Ext. Next</div>
       <h2>Your next<br>story.</h2>
       <div class="actions">
         <a class="pill-btn solid" href="/en/contact/"><span class="roll"><span data-label="Start a Project">Start a Project</span></span></a>
@@ -304,6 +210,5 @@
 <script src="/assets/vendor/ScrollTrigger.min.js"></script>
 <script src="/assets/vendor/lenis.min.js"></script>
 <script src="/assets/cinema.js"></script>
-<script src="/assets/hero-scrub.js"></script>
 </body>
 </html>

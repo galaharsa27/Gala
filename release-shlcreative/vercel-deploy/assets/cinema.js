@@ -526,16 +526,14 @@
     });
   })();
 
-  /* ---------- hero video sound toggle + youtube swap ---------- */
+  /* ---------- hero video: sound toggle + prev/next switcher ---------- */
   (() => {
-    const scrubWrap = document.querySelector("[data-hero-scrub]");
-    const ytWrap = document.querySelector(".hero-yt");
     const iframe = document.getElementById("hero-video");
-    const playBtns = [...document.querySelectorAll("[data-hero-play]")];
     const soundBtn = document.querySelector("[data-sound-toggle]");
+    const videoLabel = document.querySelector("[data-hero-video-label]");
     if (!iframe) return;
 
-    let soundOn = true;
+    let soundOn = false;
     const videos = (() => {
       try {
         return JSON.parse(iframe.dataset.videos || "[]");
@@ -560,16 +558,17 @@
       } catch (e) {}
     };
 
-    const activateVideo = () => {
+    const setVideo = (idx, animateSound) => {
+      currentVideo = (idx + videos.length) % videos.length;
       iframe.src = videoSrc(videos[currentVideo] || videos[0]);
-      if (ytWrap) ytWrap.classList.add("live");
-      setTimeout(() => {
-        send(soundOn ? "unMute" : "mute");
-        if (soundOn) send("setVolume", [100]);
-      }, 650);
+      if (videoLabel) videoLabel.textContent = "Video " + String(currentVideo + 1).padStart(2, "0");
+      if (animateSound) {
+        setTimeout(() => {
+          send(soundOn ? "unMute" : "mute");
+          if (soundOn) send("setVolume", [100]);
+        }, 650);
+      }
     };
-
-    playBtns.forEach((btn) => btn.addEventListener("click", activateVideo));
 
     if (soundBtn) {
       const sync = () => {
@@ -588,25 +587,9 @@
     document.querySelectorAll("[data-hero-video-step]").forEach((control) => {
       control.addEventListener("click", () => {
         if (!videos.length) return;
-        currentVideo = (currentVideo + Number(control.dataset.heroVideoStep || 1) + videos.length) % videos.length;
-        activateVideo();
+        setVideo(currentVideo + Number(control.dataset.heroVideoStep || 1), true);
       });
     });
-
-    if (!mobileQuery.matches && scrubWrap) {
-      let triggered = false;
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (triggered) return;
-          if (window.HeroScrub && window.HeroScrub.getProgress() > 0.92) {
-            triggered = true;
-            activateVideo();
-          }
-        },
-        { passive: true }
-      );
-    }
   })();
 
   /* ---------- simple strip carousel (team photos) ---------- */
@@ -637,44 +620,6 @@
     );
 
     show(0);
-    restart();
-  });
-
-  /* ---------- leadership carousel ---------- */
-  document.querySelectorAll("[data-lead-carousel]").forEach((carousel) => {
-    const track = carousel.querySelector("[data-lead-track]");
-    const slides = [...carousel.querySelectorAll("[data-lead-slide]")];
-    const progressBar = carousel.querySelector("[data-lead-progress]");
-    if (!track || !slides.length) return;
-
-    let current = 0;
-    let timer = null;
-    const AUTO_MS = 6500;
-
-    const render = () => {
-      track.style.transform = `translateX(-${current * 100}%)`;
-      if (progressBar) progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
-    };
-
-    const goTo = (idx) => {
-      current = (idx + slides.length) % slides.length;
-      render();
-    };
-
-    const restart = () => {
-      clearInterval(timer);
-      if (reduceMotion) return;
-      timer = setInterval(() => goTo(current + 1), AUTO_MS);
-    };
-
-    carousel.querySelectorAll("[data-lead-step]").forEach((btn) =>
-      btn.addEventListener("click", () => {
-        goTo(current + Number(btn.dataset.leadStep || 1));
-        restart();
-      })
-    );
-
-    render();
     restart();
   });
 

@@ -63,8 +63,8 @@
   <div style="display:flex;align-items:center;gap:14px">
     <a class="pill-btn cine-cta-pill" href="/contact/"><span class="roll"><span data-label="Mulai Proyek">Mulai Proyek</span></span></a>
     <button class="cine-nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">
+      <span class="bars"><span></span><span></span></span>
       <small>MENU</small>
-      <span></span>
     </button>
   </div>
 </header>
@@ -85,168 +85,74 @@
 
 <main>
 
-  <section class="cine-hero" data-hero-scrub data-scene-slate="SCENE 01 — OPENING — INT. STUDIO">
-    <div class="hero-scrub-wrap">
-      <canvas id="hero-scrub-canvas"></canvas>
-    </div>
-    <div class="hero-poster">
-      <img src="/assets/gallery-ride-wide.jpg" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.6">
-      <button type="button" data-hero-play aria-label="Putar video">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M6 4l14 8-14 8V4z" fill="#F4F3EF"/></svg>
-      </button>
-    </div>
+  <section class="cine-hero" data-scene-slate="SCENE 01 — OPENING — INT. STUDIO">
     <div class="hero-yt">
-      <iframe id="hero-video" data-videos="[&quot;HYix8fbR7yA&quot;,&quot;aAOPDXG4qBU&quot;]" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="hero-video" data-videos="[&quot;HYix8fbR7yA&quot;,&quot;aAOPDXG4qBU&quot;]" src="https://www.youtube.com/embed/HYix8fbR7yA?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=HYix8fbR7yA&amp;controls=0&amp;showinfo=0&amp;modestbranding=1&amp;rel=0&amp;playsinline=1&amp;disablekb=1&amp;enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </div>
     <div class="hero-content wrap">
       <div class="hero-slate"><i></i> Scene 01 — Opening</div>
       <h1>Cerita yang dibuat<br><em>dengan tujuan.</em></h1>
       <p>PT Samasta Hitakara Lekha — mitra kreatif untuk video, fotografi, dan brand yang dibangun dengan niat, bukan sekadar konten.</p>
       <div class="hero-actions">
-        <a class="pill-btn solid" href="#works" data-cursor="VIEW"><span class="roll"><span data-label="Lihat Karya">Lihat Karya</span></span></a>
-        <button class="link-arrow hero-full-link" type="button" data-hero-play>Tonton Penuh <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></button>
-        <button class="sound-fab on" type="button" data-sound-toggle aria-label="Suara video" aria-pressed="true"><i></i></button>
-        <button class="sound-fab" type="button" data-ambience-toggle aria-label="Ambience suara studio" hidden><i></i></button>
-      </div>
-    </div>
-  </section>
-
-  <section class="scene snap-screen" id="works" data-scene-slate="SCENE 02 — KARYA — EXT. ROAD">
-    <div class="wrap">
-      <div class="scene-head">
-        <div>
-          <div class="scene-slate"><b>02</b> Karya — Ext. Road</div>
-          <h2>Karya yang berbicara<br><em>dengan sendirinya.</em></h2>
+        <a class="pill-btn solid" href="/contact/"><span class="roll"><span data-label="Mulai Proyek">Mulai Proyek</span></span></a>
+        <button class="sound-fab" type="button" data-sound-toggle aria-label="Suara video" aria-pressed="false"><i></i></button>
+        <div class="video-switch" aria-label="Pilih video pembuka">
+          <button type="button" data-hero-video-step="-1" aria-label="Video sebelumnya">&#8592;</button>
+          <span data-hero-video-label>Video 01</span>
+          <button type="button" data-hero-video-step="1" aria-label="Video berikutnya">&#8594;</button>
         </div>
-        <p class="scene-lead">Sebagian cerita yang sudah kami tuntaskan bersama klien — dokumentasi, otomotif, panggung, dan potret.</p>
       </div>
-
-      <div class="works-grid" data-idle-breathe>
-        <a class="work-tile develop c-8 r-wide" href="/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-ride-wide.jpg" alt="Konvoi motor di jalan" loading="lazy"><span class="work-cap"><strong>Road Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-4 r-tall" href="/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-landcruiser-color.jpg" alt="Land Cruiser dalam gerak" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-4 r-tall" href="/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-rider-portrait.jpg" alt="Potret pengendara di hutan" loading="lazy"><span class="work-cap"><strong>Portrait</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-8 r-wide" href="/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-custom-bike-blue.jpg" alt="Detail motor custom" loading="lazy"><span class="work-cap"><strong>Custom Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-6 r-wide" href="/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-camp-chopper.jpg" alt="Chopper di camp hutan" loading="lazy"><span class="work-cap"><strong>Lifestyle</strong><span>SHL</span></span></a>
-        <a class="work-tile develop c-6 r-tall" href="/portfolio/" data-cursor="VIEW"><img src="/assets/gallery-wrx-blue.jpg" alt="Detail WRX biru" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-      </div>
-
-      <div class="drag-strip" data-idle-breathe>
-        <a class="work-tile develop" href="/portfolio/"><img src="/assets/gallery-ride-wide.jpg" alt="Konvoi motor di jalan" loading="lazy"><span class="work-cap"><strong>Road Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/portfolio/"><img src="/assets/gallery-landcruiser-color.jpg" alt="Land Cruiser dalam gerak" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/portfolio/"><img src="/assets/gallery-rider-portrait.jpg" alt="Potret pengendara di hutan" loading="lazy"><span class="work-cap"><strong>Portrait</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/portfolio/"><img src="/assets/gallery-custom-bike-blue.jpg" alt="Detail motor custom" loading="lazy"><span class="work-cap"><strong>Custom Culture</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/portfolio/"><img src="/assets/gallery-camp-chopper.jpg" alt="Chopper di camp hutan" loading="lazy"><span class="work-cap"><strong>Lifestyle</strong><span>SHL</span></span></a>
-        <a class="work-tile develop" href="/portfolio/"><img src="/assets/gallery-wrx-blue.jpg" alt="Detail WRX biru" loading="lazy"><span class="work-cap"><strong>Automotive</strong><span>SHL</span></span></a>
-      </div>
-
-      <div style="margin-top:34px"><a class="link-arrow" href="/portfolio/">Lihat Semua Portofolio <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a></div>
     </div>
   </section>
 
-  <section class="scene alt snap-screen" data-scene-slate="SCENE 03 — LAYANAN — INT. STUDIO">
+  <section class="scene alt snap-screen" data-scene-slate="SCENE 02 — LAYANAN — INT. STUDIO">
     <div class="wrap">
       <div class="scene-head">
         <div>
-          <div class="scene-slate"><b>03</b> Layanan — Int. Studio</div>
+          <div class="scene-slate"><b>02</b> Layanan — Int. Studio</div>
           <h2>Storytelling,<br><em>dari awal sampai akhir.</em></h2>
         </div>
-        <p class="scene-lead">Enam disiplin inti yang membawa sebuah brand dari ide sampai layar.</p>
       </div>
-      <div class="svc-list">
-        <a class="svc-row" href="/services/" data-sheet-open="Arah Kreatif" data-sheet-body="Konsep, arahan seni, dan bahasa visual untuk keseluruhan brand.">
-          <small>01</small>
-          <div><strong>Arah Kreatif</strong><span>Konsep, arahan seni, dan bahasa visual untuk keseluruhan brand.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/services/" data-sheet-open="Produksi Video Komersial" data-sheet-body="Iklan, brand film, dan product cinema dari awal sampai final.">
-          <small>02</small>
-          <div><strong>Produksi Video Komersial</strong><span>Iklan, brand film, dan product cinema dari awal sampai final.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/services/" data-sheet-open="Fotografi" data-sheet-body="Foto campaign, produk, corporate, editorial, dan dokumentasi.">
-          <small>03</small>
-          <div><strong>Fotografi</strong><span>Foto campaign, produk, corporate, editorial, dan dokumentasi.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/services/" data-sheet-open="Identitas Brand" data-sheet-body="Logo, sistem visual, panduan brand, dan gaya komunikasi.">
-          <small>04</small>
-          <div><strong>Identitas Brand</strong><span>Logo, sistem visual, panduan brand, dan gaya komunikasi.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/services/" data-sheet-open="Branding Perusahaan" data-sheet-body="Identitas perusahaan yang dibangun untuk dipercaya dan mudah dikenali.">
-          <small>05</small>
-          <div><strong>Branding Perusahaan</strong><span>Identitas perusahaan yang dibangun untuk dipercaya dan mudah dikenali.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-        <a class="svc-row" href="/services/" data-sheet-open="Branding Personal" data-sheet-body="Positioning dan konten untuk founder, profesional, dan public figure.">
-          <small>06</small>
-          <div><strong>Branding Personal</strong><span>Positioning dan konten untuk founder, profesional, dan public figure.</span></div>
-          <svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg>
-        </a>
-      </div>
-      <div style="margin-top:34px"><a class="link-arrow" href="/services/">Lihat Semua Layanan <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a></div>
+      <p class="scene-lead" style="max-width:760px;font-size:17px;line-height:1.85">Kami memulai dari arah kreatif dan konsep, lalu mengeksekusinya lewat produksi video komersial dan fotografi yang digarap dengan standar profesional. Semua diikat dalam satu identitas brand yang konsisten — baik untuk perusahaan maupun personal — supaya setiap cerita yang kami buat benar-benar mewakili siapa Anda.</p>
+      <div style="margin-top:30px"><a class="link-arrow" href="/services/">Lihat Semua Layanan <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a></div>
     </div>
   </section>
 
-  <section class="scene snap-screen" data-scene-slate="SCENE 04 — PIMPINAN — INT. STUDIO">
+  <section class="scene snap-screen" data-scene-slate="SCENE 03 — PIMPINAN — INT. STUDIO">
     <div class="wrap">
       <div class="scene-head">
         <div>
-          <div class="scene-slate"><b>04</b> Pimpinan — Int. Studio</div>
+          <div class="scene-slate"><b>03</b> Pimpinan — Int. Studio</div>
           <h2>Orang-orang<br><em>di balik ekosistem.</em></h2>
         </div>
       </div>
 
-      <div class="lead-carousel" data-lead-carousel>
-        <div class="lead-viewport">
-          <div class="lead-track" data-lead-track>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-galang.jpg" alt="Galang Kharisma Rizki" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Direktur</em>
-                <h3>Galang Kharisma Rizki</h3>
-                <p>Memimpin visi perusahaan, arahan kreatif, kemitraan strategis, inovasi, dan pengembangan bisnis.</p>
-                <a class="link-arrow" href="https://www.instagram.com/galaharsa.sh1/" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a>
-              </div>
-            </div>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-deni.jpg" alt="Deni Surachmat" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Manajer Keuangan</em>
-                <h3>Deni Surachmat</h3>
-                <p>Bertanggung jawab atas perencanaan keuangan, budgeting, cash flow, accounting, dan keberlanjutan perusahaan.</p>
-                <a class="link-arrow" href="https://www.instagram.com/denisurachmat/" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a>
-              </div>
-            </div>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-amir.jpg" alt="Amir Maulana" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Manajer Operasional</em>
-                <h3>Amir Maulana</h3>
-                <p>Bertanggung jawab atas alur produksi, jadwal, eksekusi, logistik, quality assurance, dan operasional.</p>
-              </div>
-            </div>
-            <div class="lead-slide" data-lead-slide>
-              <div class="lead-photo"><img src="/assets/leader-uta.jpg" alt="Frisardi Ramadhana (Uta)" loading="lazy"></div>
-              <div class="lead-body">
-                <em>Manajer Komunikasi Kreatif</em>
-                <h3>Frisardi Ramadhana (Uta)</h3>
-                <p>Mengembangkan strategi komunikasi, konsep kreatif, narasi brand, dan konten produksi.</p>
-                <a class="link-arrow" href="https://www.instagram.com/utautinn?igsh=MW55ZDlqdG8xanpjaA==" target="_blank" rel="noopener">Instagram <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a>
-              </div>
-            </div>
-          </div>
+      <div class="lead-grid">
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-galang.jpg" alt="Galang Kharisma Rizki" loading="lazy"></div>
+          <h3>Galang Kharisma Rizki</h3>
+          <em>Direktur</em>
         </div>
-        <div class="lead-controls">
-          <button class="lead-nav" type="button" data-lead-step="-1" aria-label="Pimpinan sebelumnya">&#8592;</button>
-          <div class="lead-progress"><i data-lead-progress></i></div>
-          <button class="lead-nav" type="button" data-lead-step="1" aria-label="Pimpinan berikutnya">&#8594;</button>
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-deni.jpg" alt="Deni Surachmat" loading="lazy"></div>
+          <h3>Deni Surachmat</h3>
+          <em>Manajer Keuangan</em>
+        </div>
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-amir.jpg" alt="Amir Maulana" loading="lazy"></div>
+          <h3>Amir Maulana</h3>
+          <em>Manajer Operasional</em>
+        </div>
+        <div class="lead-item">
+          <div class="lead-photo"><img src="/assets/leader-uta.jpg" alt="Frisardi Ramadhana (Uta)" loading="lazy"></div>
+          <h3>Frisardi Ramadhana (Uta)</h3>
+          <em>Manajer Komunikasi Kreatif</em>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="scene alt" data-scene-slate="SCENE 05 — KREDIBILITAS">
+  <section class="scene alt" data-scene-slate="SCENE 04 — KREDIBILITAS">
     <div class="wrap">
       <div class="trust-strip">
         <div><b>14</b><span>Layanan Terintegrasi</span></div>
@@ -256,9 +162,9 @@
     </div>
   </section>
 
-  <section class="scene snap-screen" data-scene-slate="SCENE 06 — MULAI — EXT. NEXT">
+  <section class="scene snap-screen" data-scene-slate="SCENE 05 — MULAI — EXT. NEXT">
     <div class="wrap close-cta">
-      <div class="scene-slate"><b>06</b> Mulai — Ext. Next</div>
+      <div class="scene-slate"><b>05</b> Mulai — Ext. Next</div>
       <h2>Cerita Anda<br>berikutnya.</h2>
       <div class="actions">
         <a class="pill-btn solid" href="/contact/"><span class="roll"><span data-label="Mulai Proyek">Mulai Proyek</span></span></a>
@@ -304,6 +210,5 @@
 <script src="/assets/vendor/ScrollTrigger.min.js"></script>
 <script src="/assets/vendor/lenis.min.js"></script>
 <script src="/assets/cinema.js"></script>
-<script src="/assets/hero-scrub.js"></script>
 </body>
 </html>
