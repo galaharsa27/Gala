@@ -180,6 +180,10 @@
       syncMeta();
     };
 
+    // Leadership is now static on all breakpoints (no slider interaction).
+    resetDesktop();
+    return;
+
     const render = (animated = true) => {
       if (!mobileQuery.matches) {
         resetDesktop();
