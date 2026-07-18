@@ -7,6 +7,7 @@ const output = path.join(deploy, ".vercel", "output", "static");
 const targets = [root, deploy, output];
 const shlInstagram = "https://www.instagram.com/shl.creative?igsh=MTcwcHpoNGtvb2ZiYg==";
 const socialPreviewImage = "https://shlcreative.com/assets/social-preview.jpg";
+const faviconVersion = "v=20260718a";
 const aboutSlides = [
   ["about-team-studio-wide.png", "SHL Creative Production team in studio"],
   ["about-team-action-truck.png", "SHL Creative Production action truck concept"],
@@ -206,15 +207,16 @@ function layout(page, body, lang = "id") {
   <meta name="twitter:title" content="${esc(page.title[lang])}">
   <meta name="twitter:description" content="${esc(desc)}">
   <meta name="twitter:image" content="${socialPreviewImage}">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
-  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png">
-  <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/favicon.ico?${faviconVersion}" sizes="any">
+  <link rel="shortcut icon" href="/favicon.ico?${faviconVersion}">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?${faviconVersion}">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?${faviconVersion}">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png?${faviconVersion}">
+  <link rel="icon" type="image/png" sizes="64x64" href="/favicon-64x64.png?${faviconVersion}">
+  <link rel="icon" type="image/png" href="/favicon.png?${faviconVersion}">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?${faviconVersion}">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?${faviconVersion}">
+  <link rel="manifest" href="/manifest.webmanifest?${faviconVersion}">
   <meta name="msapplication-config" content="/browserconfig.xml">
   <meta name="msapplication-TileColor" content="#050505">
   <meta name="msapplication-TileImage" content="/mstile-150x150.png">
