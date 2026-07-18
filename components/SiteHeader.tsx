@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { contact } from '@/data/profile';
 
 type RouteSlug = '/profil' | '/karir' | '/proyek' | '/sosial' | '/kontak';
 
@@ -10,21 +11,22 @@ const navItems: Array<{ href: RouteSlug; label: string }> = [
   { href: '/kontak', label: 'Kontak' }
 ];
 
-const whatsappUrl = 'https://wa.me/6281214131427?text=Halo%20Galang%2C%20saya%20ingin%20berkolaborasi.';
+const whatsappUrl = `${contact.whatsappUrl}?text=Halo%20Galang%2C%20saya%20ingin%20berkolaborasi.`;
 
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/95 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-4 sm:px-10 lg:px-16">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-ink/90 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4 sm:px-10 lg:px-16">
         <Link
           href="/"
-          className="text-sm uppercase tracking-[0.45em] text-white transition hover:text-accent"
+          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 font-display text-sm font-black uppercase tracking-[0.02em] text-white transition hover:border-accent hover:text-accent"
           data-cursor-hover
+          aria-label="Kembali ke beranda Galang Kharisma Rizki"
         >
-          GALAHARSA
+          GKR
         </Link>
 
-        <nav className="hidden items-center gap-8 text-sm uppercase tracking-[0.28em] text-white/60 md:flex">
+        <nav className="hidden items-center gap-7 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -37,15 +39,21 @@ export default function SiteHeader() {
           ))}
         </nav>
 
-        <a
-          href={whatsappUrl}
-          target="_blank"
-          rel="noreferrer"
-          data-cursor-hover
-          className="rounded-full border border-accent/20 bg-accent/10 px-4 py-2 text-xs uppercase tracking-[0.28em] text-accent transition hover:bg-accent hover:text-white"
-        >
-          WhatsApp
-        </a>
+        <div className="flex items-center gap-2">
+          <div className="lang-switch" aria-label="Language switcher">
+            <Link href="/" hrefLang="id">ID</Link>
+            <Link href="/en" hrefLang="en">EN</Link>
+          </div>
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noreferrer"
+            data-cursor-hover
+            className="hidden rounded-full border border-accent bg-accent px-4 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-white transition hover:-translate-y-0.5 sm:inline-flex"
+          >
+            Contact
+          </a>
+        </div>
       </div>
     </header>
   );

@@ -1,13 +1,14 @@
 import PageShell from '@/components/PageShell';
+import { contact } from '@/data/profile';
 
 const accounts = [
   {
     handle: '@galaharsa.sh1',
-    subLabel: 'Personal · Catatan',
+    subLabel: 'Personal / Catatan',
     initial: 'G',
     bio: 'Strategy planner, conceptor, dan kepala di balik banyak proyek. Catatan harian, momentum, dan refleksi pribadi.',
     stats: [{ n: '240+', l: 'Posts' }, { n: '5K+', l: 'Followers' }, { n: 'Active', l: 'Sejak 2018' }],
-    url: 'https://www.instagram.com/galaharsa.sh1/',
+    url: contact.instagram[0],
     note: 'Pribadi',
     type: 'personal',
   },
@@ -17,7 +18,7 @@ const accounts = [
     initial: 'SHL',
     bio: 'Production house: commercial, brand identity, webseries, event concept. Konsep yang punya nyawa.',
     stats: [{ n: '180+', l: 'Posts' }, { n: '12K', l: 'Followers' }, { n: 'Brand', l: 'Sejak 2022' }],
-    url: 'https://www.instagram.com/shl.creative/',
+    url: contact.instagram[1],
     note: 'Bisnis',
     type: 'shl',
   },
@@ -28,18 +29,18 @@ export default function SocialPage() {
     <PageShell
       eyebrow="Sosial"
       title="Di Instagram"
-      description="Dua jendela untuk lihat saya bekerja — akun personal dan akun bisnis PT. Samasta Hitakara Lekha."
+      description="Dua jendela untuk lihat saya bekerja - akun personal dan akun bisnis PT. Samasta Hitakara Lekha."
       aside={(
         <div className="space-y-6">
           <div className="rounded-[1.75rem] border border-white/10 bg-ink/90 p-8">
             <p className="text-xs uppercase tracking-[0.32em] text-accent">Akun</p>
-            <p className="mt-5 text-sm leading-7 text-white/70">2 akun aktif — personal dan bisnis. Dua sudut pandang yang berbeda, satu visi yang sama.</p>
+            <p className="mt-5 text-sm leading-7 text-white/70">2 akun aktif - personal dan bisnis. Dua sudut pandang yang berbeda, satu visi yang sama.</p>
           </div>
           <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-8">
             <p className="text-xs uppercase tracking-[0.32em] text-accent">Kontak Cepat</p>
             <div className="mt-5 space-y-3">
-              <a href="https://wa.me/6281214131427" target="_blank" rel="noopener noreferrer" data-cursor-hover className="block rounded-xl border border-accent/20 bg-accent/10 px-4 py-3 text-sm text-accent transition hover:bg-accent hover:text-white">WhatsApp</a>
-              <a href="mailto:galaharsa.27@gmail.com" data-cursor-hover className="block rounded-xl border border-white/10 px-4 py-3 text-sm text-white/70 transition hover:border-white/30 hover:text-white">Email</a>
+              <a href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer" data-cursor-hover className="block rounded-xl border border-accent/20 bg-accent/10 px-4 py-3 text-sm text-accent transition hover:bg-accent hover:text-white">WhatsApp</a>
+              <a href={`mailto:${contact.email}`} data-cursor-hover className="block rounded-xl border border-white/10 px-4 py-3 text-sm text-white/70 transition hover:border-white/30 hover:text-white">Email</a>
             </div>
           </div>
         </div>

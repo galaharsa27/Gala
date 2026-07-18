@@ -1,55 +1,5 @@
 import PageShell from '@/components/PageShell';
-
-const careerChapters = [
-  {
-    idx: '01',
-    period: '~2015 – 2019',
-    chapter: 'Kreatif & Brand',
-    orgs: [
-      'Creative Dir — I AM Management',
-      'Art Dir — Blacktiger EO',
-      'Branding Consultant — Roomtoday DC',
-      'Founder — SMMR Studio',
-      'Founder — Mankey Brothers',
-    ],
-    note: 'Tempat mengasah storytelling, konsep visual, dan identitas brand.',
-  },
-  {
-    idx: '02',
-    period: '2018 – 2020',
-    chapter: 'Strategi & Politik',
-    orgs: [
-      'Creative IT — Kampanye Nasional Bdg Barat',
-      'PM — Tim Pemenangan Walikota Bukittinggi',
-      'Konsultan — Toby Sagara',
-      'BD — Grezeski & William Schone',
-    ],
-    note: 'Menggerakkan banyak pihak dalam tekanan dan tenggat waktu ketat.',
-  },
-  {
-    idx: '03',
-    period: '2019 – 2025',
-    chapter: 'Defence Tech BD',
-    orgs: [
-      'Wakil Direktur',
-      'BD & Product Lead',
-      'PT. Nexin Maya Vision',
-    ],
-    note: 'Fokus di BD, branding produk, manajemen klien, dan pengembangan pasar di sektor pertahanan nasional.',
-  },
-  {
-    idx: '04',
-    period: '2022 – Sekarang',
-    chapter: 'Bangun Ekosistem',
-    orgs: [
-      'Founder & Dir — RFA',
-      'Komisaris & Creative Dir — SHL',
-      'Presiden Komisaris — Kawan Secuan',
-      'Direktur — PT Suplai Energi Nusantara',
-    ],
-    note: 'Membangun perusahaan sendiri dari nol di tiga domain berbeda.',
-  },
-];
+import { careerChapters, companies, localize, selectedWorks } from '@/data/profile';
 
 const nexinContribs = [
   {
@@ -62,7 +12,7 @@ const nexinContribs = [
   },
   {
     label: 'Manajemen Klien',
-    text: 'Koordinasi antara kebutuhan klien dan tim teknis internal — memastikan ekspektasi dan deliverable selaras.',
+    text: 'Koordinasi antara kebutuhan klien dan tim teknis internal - memastikan ekspektasi dan deliverable selaras.',
   },
   {
     label: 'Pengembangan Pasar',
@@ -70,59 +20,44 @@ const nexinContribs = [
   },
 ];
 
-const companies = [
-  {
-    num: '01',
-    sector: 'Strategic Consulting',
-    period: '2022 – Sekarang',
-    label: 'Strategic Consulting',
-    role: 'Founder & Direktur',
-    name: 'PT. Revolusi Fundamental Asia (RFA)',
-    desc: 'Membantu organisasi bertransformasi lewat strategi, sistem, dan teknologi. Dari pemetaan masalah hingga implementasi — termasuk akses ke rantai pengadaan internasional untuk defence dan teknologi.',
-    tags: ['Konsultasi Strategi', 'AI Integration', 'ERP / CRM', 'Pengadaan Internasional'],
-  },
-  {
-    num: '02',
-    sector: 'Creative Production',
-    period: '2022 – Sekarang',
-    label: 'Creative Production',
-    role: 'Komisaris & Creative Director',
-    name: 'PT. Samasta Hitakara Lekha (SHL)',
-    desc: 'Mengarahkan konsep secara menyeluruh: identitas brand, produksi video komersial, company profile, webseries, event concept, dan strategi kampanye yang punya nyawa.',
-    tags: ['Creative Direction', 'Video Production', 'Brand Identity', 'Event & Kampanye'],
-  },
-  {
-    num: '03',
-    sector: 'Market Intelligence',
-    period: '2022 – Sekarang',
-    label: 'Market Intelligence',
-    role: 'Presiden Komisaris & Chief Conceptor',
-    name: 'PT. Kawan Secuan Indonesia',
-    desc: 'OSTKA: sistem targeting berbasis data lokasi dan preferensi. IMA & Red Eye: platform analitik berbasis perilaku komunitas dan market intelligence untuk engagement terstruktur.',
-    tags: ['Lead Targeting', 'Market Intelligence', 'Data Analytics'],
-  },
-];
+const localizedCareerChapters = careerChapters.map((chapter, index) => ({
+  idx: String(index + 1).padStart(2, '0'),
+  period: chapter.period,
+  chapter: localize(chapter.title, 'id'),
+  orgs: chapter.roles.map((role) => localize(role, 'id')),
+  note: localize(chapter.text, 'id'),
+}));
 
-const builds = [
-  { num: '01', href: 'https://shlcreative.com', label: 'shlcreative.com', meta: 'PT Samasta Hitakara Lekha / SHL Creative Production' },
-  { num: '02', href: 'https://molistra.com', label: 'molistra.com', meta: '' },
-  { num: '03', href: 'https://magoj.com', label: 'magoj.com', meta: '' },
-];
+const localizedCompanies = companies.map((company, index) => ({
+  num: String(index + 1).padStart(2, '0'),
+  label: company.code,
+  role: localize(company.role, 'id'),
+  name: company.name,
+  desc: localize(company.focus, 'id'),
+  tags: company.scope.map((item) => localize(item, 'id')),
+}));
+
+const builds = selectedWorks.map((work, index) => ({
+  num: String(index + 1).padStart(2, '0'),
+  href: work.href,
+  label: work.domain.toLowerCase(),
+  meta: work.category,
+}));
 
 export default function CareerPage() {
   return (
     <PageShell
       eyebrow="Karir"
       title="Perjalanan Karir"
-      description="Rekam jejak lintas industri — dari dunia kreatif, politik, teknologi pertahanan, hingga membangun ekosistem bisnis sendiri."
+      description="Rekam jejak lintas industri - dari dunia kreatif, politik, teknologi pertahanan, hingga membangun ekosistem bisnis sendiri."
       aside={(
         <div className="space-y-6">
           <div className="rounded-[1.75rem] border border-white/10 bg-ink/90 p-8">
             <p className="text-xs uppercase tracking-[0.32em] text-accent">Ringkasan</p>
             <div className="mt-6 space-y-3 text-sm leading-7 text-white/70">
               <p>10+ tahun pengalaman aktif lintas industri.</p>
-              <p>4 perusahaan didirikan sendiri dari nol.</p>
-              <p>5 babak karir di domain berbeda.</p>
+              <p>{localizedCompanies.length} perusahaan formal dibangun atau dipimpin.</p>
+              <p>{localizedCareerChapters.length} babak karir di domain berbeda.</p>
             </div>
           </div>
           <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-8">
@@ -147,7 +82,7 @@ export default function CareerPage() {
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-10 shadow-[0_30px_80px_rgba(0,0,0,0.18)]">
           <p className="text-sm uppercase tracking-[0.3em] text-accent">Babak Karir</p>
           <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            {careerChapters.map((c) => (
+            {localizedCareerChapters.map((c) => (
               <div key={c.idx} className="rounded-2xl border border-white/10 bg-ink/80 p-6">
                 <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-accent">{c.period}</p>
                 <h3 className="mt-3 font-display text-xl font-bold uppercase text-white">{c.chapter}</h3>
@@ -166,13 +101,13 @@ export default function CareerPage() {
         <div className="rounded-[2rem] border border-white/10 bg-ink/90 p-10 shadow-[0_30px_80px_rgba(0,0,0,0.18)]">
           <div className="flex items-start justify-between gap-4">
             <p className="text-sm uppercase tracking-[0.3em] text-accent">Pengalaman di PT. Nexin Maya Vision</p>
-            <span className="font-mono text-[10px] text-white/40">2019 – 2025 · Wakil Direktur</span>
+            <span className="font-mono text-[10px] text-white/40">2019 - 2025 / Wakil Direktur</span>
           </div>
           <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_2fr]">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">Posisi</p>
               <h3 className="mt-3 font-display text-2xl font-bold uppercase text-white">Wakil Direktur<br />BD & Product Lead</h3>
-              <p className="mt-2 font-mono text-[10px] text-white/40">2019 – 2025 · Bandung</p>
+              <p className="mt-2 font-mono text-[10px] text-white/40">2019 - 2025 / Bandung</p>
               <p className="mt-4 text-sm leading-7 text-white/60">
                 Bergabung sebagai karyawan dengan tanggung jawab di area <strong className="text-white">business development, branding produk, manajemen klien, dan pengembangan pasar</strong>. Membantu membangun kepercayaan dengan institusi negara melalui pendekatan BD dan presentasi produk.
               </p>
@@ -192,7 +127,7 @@ export default function CareerPage() {
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-10 shadow-[0_30px_80px_rgba(0,0,0,0.18)]">
           <p className="text-sm uppercase tracking-[0.3em] text-accent">Perusahaan yang Saya Bangun</p>
           <div className="mt-8 space-y-6">
-            {companies.map((co) => (
+            {localizedCompanies.map((co) => (
               <div key={co.num} className="rounded-2xl border border-white/10 bg-ink/80 p-8">
                 <div className="flex items-start justify-between gap-4">
                   <div>

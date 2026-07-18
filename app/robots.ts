@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { canonicalBaseUrl } from '@/data/profile';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
     },
-    sitemap: 'https://galaharsa.com/sitemap.xml',
+    sitemap: `${canonicalBaseUrl}/sitemap.xml`,
   };
 }

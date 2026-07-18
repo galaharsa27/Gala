@@ -5,6 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:galaharsa": "npm run build",
+    "build:shl": "npm --prefix release-shlcreative/vercel-deploy run build",
+    "build:magoj": "npm --prefix magoj.com run build",
+    "build:molistra": "npm --prefix MOLISTRA run build",
+    "build:rob1": "npm --prefix rob1 run build",
+    "build:ari": "npm --prefix aribaba run build",
     "start": "next start",
     "lint": "next lint"
   },

@@ -1,0 +1,14 @@
+.git
+.next
+node_modules
+*.zip
+tmp-*.png
+qa-*.png
+next-*.log
+public_html
+tools
+.hostinger-upload-profile
+.ga4-remote-profile
+.gsc-profile
+.tmp-chrome-*
+tmp-ga4-*
