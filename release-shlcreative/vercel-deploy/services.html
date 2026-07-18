@@ -37,46 +37,166 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260718a">
   <link rel="manifest" href="/manifest.webmanifest?v=20260718a">
   <meta name="msapplication-config" content="/browserconfig.xml">
-  <meta name="msapplication-TileColor" content="#050505">
+  <meta name="msapplication-TileColor" content="#0D0D0F">
   <meta name="msapplication-TileImage" content="/mstile-150x150.png">
-  <meta name="theme-color" content="#050505">
+  <meta name="theme-color" content="#0D0D0F">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/site.css">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700;800&family=Archivo+Expanded:wght@700;800;900&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/cinema.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"SHL Creative Production","legalName":"PT Samasta Hitakara Lekha","url":"https://shlcreative.com/","logo":"https://shlcreative.com/assets/shl-logo-mark.png","email":"Shlcreativeproduction@gmail.com","telephone":"+62 812-1413-1427","address":{"@type":"PostalAddress","streetAddress":"Jl. Babakan Jeruk IV No. 9","addressLocality":"Bandung","addressRegion":"West Java","addressCountry":"ID"},"sameAs":["https://www.instagram.com/shl.creative?igsh=MTcwcHpoNGtvb2ZiYg=="]}</script>
 </head>
 <body data-page="services">
-<header class="site-header" id="site-header">
-    <a class="brand" href="/">
-    <img class="brand-logo" src="/assets/shl-logo-mark.png" alt="SHL">
+<div id="opening-scene"><div class="clap"><i></i><span>SHL — REC</span></div></div>
+<div class="letterbox-bar top"></div>
+<div class="letterbox-bar bottom"></div>
+<div id="page-wipe"></div>
+<canvas id="grain-canvas"></canvas>
+<div id="film-cursor"><span></span></div>
+
+<header class="cine-header" id="site-header">
+  <a class="cine-brand" href="/">
+    <img class="cine-brand-logo" src="/assets/shl-logo-mark.png" alt="SHL">
     <span><b>SHL CREATIVE PRODUCTION</b><i>PT SAMASTA HITAKARA LEKHA</i></span>
   </a>
-    <button class="menu-button" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
-    <nav class="site-nav" aria-label="Primary">
-      <a class="" href="/">Beranda</a><a class="" href="/about/">Tentang</a><a class="active" href="/services/">Layanan</a><a class="" href="/portfolio/">Portofolio</a><a class="" href="/contact/">Kontak</a>
-      <span class="lang-switch"><a class="active" href="/services/">ID</a><a class="" href="/en/services/">EN</a></span>
-      <a class="nav-cta" href="/contact/">Mulai Proyek</a>
-    </nav>
-  </header>
+  <span class="cine-rec"><i></i><span class="cine-tc" data-timecode>00:00:00:00</span><span data-scene-label style="margin-left:14px;color:var(--muted)"></span></span>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a class="pill-btn cine-cta-pill" href="/contact/"><span class="roll"><span data-label="Mulai Proyek">Mulai Proyek</span></span></a>
+    <button class="cine-nav-toggle" type="button" aria-label="Buka menu" aria-expanded="false">
+      <small>MENU</small>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<nav class="scene-menu" aria-label="Primary">
+  <div class="scene-menu-list">
+    <a href="/"><small>01</small> Beranda</a>
+    <a href="/about/"><small>02</small> Tentang</a>
+    <a href="/services/" class="active"><small>03</small> Layanan</a>
+    <a href="/portfolio/"><small>04</small> Portofolio</a>
+    <a href="/contact/"><small>05</small> Kontak</a>
+  </div>
+  <div class="scene-menu-foot">
+    <span class="lang-switch"><a class="active" href="/services/">ID</a><a href="/en/services/">EN</a></span>
+    <a class="link-arrow" href="https://wa.me/6281214131427">Chat WhatsApp <svg viewBox="0 0 15 9"><path d="M0 4.5H13M8 0.5 13 4.5 8 8.5"/></svg></a>
+  </div>
+</nav>
+
 <main>
-    <section class="page-hero section"><div class="wrap"><div class="eyebrow">Layanan Kami</div><h1>Creative, production, dan technology dalam satu tim.</h1><p>Dari konsep pertama sampai deployment final - visual storytelling, brand system, campaign, website, aplikasi mobile, dan solusi IT.</p></div></section>
-    <section class="section"><div class="wrap"><div class="split"><div><div class="eyebrow">Daftar Layanan</div><h2>Dibangun untuk kebutuhan kerja, bukan sekadar ramai.</h2></div><p class="lead">Layanan disusun dari strategi, produksi, distribusi, sampai pengembangan digital agar setiap kebutuhan punya alur kerja yang jelas.</p></div><div class="service-groups"><div class="service-group"><h3>Kreatif &amp; Brand</h3><div class="service-list"><a class="service-row" href="/contact/"><small>01</small><div><strong>Arah Kreatif</strong><span>Konsep, arahan seni, dan bahasa visual untuk keseluruhan brand.</span></div></a><a class="service-row" href="/contact/"><small>02</small><div><strong>Produksi Video Komersial</strong><span>Iklan, brand film, dan product cinema dari awal sampai final.</span></div></a><a class="service-row" href="/contact/"><small>03</small><div><strong>Fotografi</strong><span>Foto campaign, produk, corporate, editorial, dan dokumentasi.</span></div></a><a class="service-row" href="/contact/"><small>04</small><div><strong>Identitas Brand</strong><span>Logo, sistem visual, panduan brand, dan gaya komunikasi.</span></div></a><a class="service-row" href="/contact/"><small>05</small><div><strong>Branding Perusahaan</strong><span>Identitas perusahaan yang dibangun untuk dipercaya dan mudah dikenali.</span></div></a><a class="service-row" href="/contact/"><small>06</small><div><strong>Branding Personal</strong><span>Positioning dan konten untuk founder, profesional, dan public figure.</span></div></a><a class="service-row" href="/contact/"><small>07</small><div><strong>Branding Komunitas</strong><span>Identitas dan konten untuk komunitas, gerakan, dan kolektif.</span></div></a></div></div><div class="service-group"><h3>Produksi &amp; Digital</h3><div class="service-list"><a class="service-row" href="/contact/"><small>08</small><div><strong>Pembuatan Konten</strong><span>Konten yang punya tujuan, terasa kuat, dan tetap perform.</span></div></a><a class="service-row" href="/contact/"><small>09</small><div><strong>Manajemen Media Sosial</strong><span>Strategi, kalender konten, publikasi, dan laporan performa.</span></div></a><a class="service-row" href="/contact/"><small>10</small><div><strong>Konsep Event</strong><span>Pengalaman event yang dirancang dan didokumentasikan dari awal sampai akhir.</span></div></a><a class="service-row" href="/contact/"><small>11</small><div><strong>Campaign Kreatif</strong><span>Campaign terintegrasi lintas kanal.</span></div></a><a class="service-row" href="/contact/"><small>12</small><div><strong>Pengembangan Website</strong><span>Website cepat, elegan, dan fokus pada konversi.</span></div></a><a class="service-row" href="/contact/"><small>13</small><div><strong>Pengembangan Aplikasi Mobile</strong><span>Desain produk dan pengembangan aplikasi mobile.</span></div></a><a class="service-row" href="/contact/"><small>14</small><div><strong>Solusi IT</strong><span>Sistem dan infrastruktur digital yang siap berkembang.</span></div></a></div></div></div></div></section>
-    <section class="section alt"><div class="split wrap"><div><div class="eyebrow">Layanan Utama</div><h2>Produksi Video Komersial</h2><p class="lead">Brand film, TVC, dan product cinema yang diproduksi dengan standar profesional, color grade matang, dan editing yang dibuat untuk menggerakkan audiens.</p></div><div><div class="service-list"><div class="service-row"><small>01</small><div><strong>Gambar cinema-grade</strong><span>Diproduksi dengan kamera profesional, lighting terkontrol, dan warna yang dikalibrasi.</span></div></div><div class="service-row"><small>02</small><div><strong>Script berbasis cerita</strong><span>Konsep ditulis sesuai positioning brand dan disetujui sebelum produksi.</span></div></div><div class="service-row"><small>03</small><div><strong>Delivery siap tayang</strong><span>Master disiapkan untuk TVC, web, social, dan kebutuhan layar lainnya.</span></div></div><div class="service-row"><small>04</small><div><strong>Lisensi jelas</strong><span>Kebutuhan musik, talent, dan lokasi ditangani dengan dokumentasi yang rapi.</span></div></div><div class="service-row"><small>05</small><div><strong>Post-production matang</strong><span>Editing, color grading, sound design, dan motion graphics dalam satu alur kerja.</span></div></div></div></div></div></section>
-    <section class="section blue"><div class="wrap"><div class="eyebrow">Alur Kerja</div><div class="cards"><div class="card"><small>01</small><h3>Brief</h3></div><div class="card"><small>02</small><h3>Konsep</h3></div><div class="card"><small>03</small><h3>Pre-production</h3></div><div class="card"><small>04</small><h3>Produksi</h3></div><div class="card"><small>05</small><h3>Post</h3></div><div class="card"><small>06</small><h3>Delivery</h3></div></div><div style="margin-top:42px"><a class="btn" href="/contact/">Mulai Diskusi</a></div></div></section>
-  </main>
-<footer class="site-footer">
-    <div class="footer-grid">
-      <div><a class="brand" href="/">
-    <img class="brand-logo" src="/assets/shl-logo-mark.png" alt="SHL">
-    <span><b>SHL CREATIVE PRODUCTION</b><i>PT SAMASTA HITAKARA LEKHA</i></span>
-  </a><p>Ekosistem kreatif untuk visual storytelling yang sinematik. Autentik. Kreatif. Tak lekang waktu.</p></div>
-      <div><b>Peta Situs</b><a href="/">Beranda</a><a href="/about/">Tentang</a><a href="/services/">Layanan</a><a href="/portfolio/">Portofolio</a><a href="/contact/">Kontak</a></div>
-      <div><b>Studio</b><p>Jl. Babakan Jeruk IV No. 9<br>Bandung, West Java, Indonesia</p><a href="tel:+6281214131427">+62 812-1413-1427</a></div>
-      <div><b>Sosial</b><a href="https://www.instagram.com/shl.creative?igsh=MTcwcHpoNGtvb2ZiYg==" target="_blank" rel="noopener">Instagram</a><a href="mailto:Shlcreativeproduction@gmail.com">Email</a></div>
+
+  <section class="page-hero" data-scene-slate="SCENE 03 — LAYANAN — INT. STUDIO">
+    <div class="wrap">
+      <div class="scene-slate"><b>03</b> Layanan — Int. Studio</div>
+      <h1>Creative, production, dan<br><em>technology dalam satu tim.</em></h1>
+      <p>Dari konsep pertama sampai deployment final — visual storytelling, brand system, campaign, website, aplikasi mobile, dan solusi IT.</p>
     </div>
-    <div class="footer-bottom"><span>&copy; 2026 PT SAMASTA HITAKARA LEKHA. SELURUH HAK CIPTA DILINDUNGI.</span><span>AUTHENTIC / CREATIVE / TIMELESS</span></div>
-  </footer>
-<script src="/assets/site.js"></script>
+  </section>
+
+  <section class="scene" data-scene-slate="SCENE 03 — KREATIF &amp; BRAND">
+    <div class="wrap">
+      <div class="scene-head">
+        <div>
+          <div class="scene-slate"><b>—</b> Kreatif &amp; Brand</div>
+          <h2>Dibangun untuk kebutuhan kerja,<br><em>bukan sekadar ramai.</em></h2>
+        </div>
+        <p class="scene-lead">Layanan disusun dari strategi, produksi, distribusi, sampai pengembangan digital agar setiap kebutuhan punya alur kerja yang jelas.</p>
+      </div>
+      <div class="svc-list">
+        <a class="svc-row" href="/contact/"><small>01</small><div><strong>Arah Kreatif</strong><span>Konsep, arahan seni, dan bahasa visual untuk keseluruhan brand.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>02</small><div><strong>Produksi Video Komersial</strong><span>Iklan, brand film, dan product cinema dari awal sampai final.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>03</small><div><strong>Fotografi</strong><span>Foto campaign, produk, corporate, editorial, dan dokumentasi.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>04</small><div><strong>Identitas Brand</strong><span>Logo, sistem visual, panduan brand, dan gaya komunikasi.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>05</small><div><strong>Branding Perusahaan</strong><span>Identitas perusahaan yang dibangun untuk dipercaya dan mudah dikenali.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>06</small><div><strong>Branding Personal</strong><span>Positioning dan konten untuk founder, profesional, dan public figure.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>07</small><div><strong>Branding Komunitas</strong><span>Identitas dan konten untuk komunitas, gerakan, dan kolektif.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene alt" data-scene-slate="SCENE 03 — PRODUKSI &amp; DIGITAL">
+    <div class="wrap">
+      <div class="scene-head">
+        <div>
+          <div class="scene-slate"><b>—</b> Produksi &amp; Digital</div>
+          <h2>Konten, kanal, dan produk<br><em>digital yang perform.</em></h2>
+        </div>
+      </div>
+      <div class="svc-list">
+        <a class="svc-row" href="/contact/"><small>08</small><div><strong>Pembuatan Konten</strong><span>Konten yang punya tujuan, terasa kuat, dan tetap perform.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>09</small><div><strong>Manajemen Media Sosial</strong><span>Strategi, kalender konten, publikasi, dan laporan performa.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>10</small><div><strong>Konsep Event</strong><span>Pengalaman event yang dirancang dan didokumentasikan dari awal sampai akhir.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>11</small><div><strong>Campaign Kreatif</strong><span>Campaign terintegrasi lintas kanal.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>12</small><div><strong>Pengembangan Website</strong><span>Website cepat, elegan, dan fokus pada konversi.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>13</small><div><strong>Pengembangan Aplikasi Mobile</strong><span>Desain produk dan pengembangan aplikasi mobile.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+        <a class="svc-row" href="/contact/"><small>14</small><div><strong>Solusi IT</strong><span>Sistem dan infrastruktur digital yang siap berkembang.</span></div><svg class="arr" viewBox="0 0 26 14"><path d="M0 7H24M17 0l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene" data-scene-slate="SCENE 03 — LAYANAN UTAMA">
+    <div class="wrap split-editorial">
+      <div>
+        <div class="scene-slate"><b>—</b> Layanan Utama</div>
+        <h2 style="font-family:var(--font-display);font-weight:800;text-transform:uppercase;font-size:clamp(26px,3.6vw,44px);line-height:1.04;margin:14px 0 0">Produksi Video<br>Komersial</h2>
+        <p class="lead" style="margin-top:20px">Brand film, TVC, dan product cinema yang diproduksi dengan standar profesional, color grade matang, dan editing yang dibuat untuk menggerakkan audiens.</p>
+      </div>
+      <div class="svc-list">
+        <div class="svc-row"><small>01</small><div><strong>Gambar cinema-grade</strong><span>Diproduksi dengan kamera profesional, lighting terkontrol, dan warna yang dikalibrasi.</span></div></div>
+        <div class="svc-row"><small>02</small><div><strong>Script berbasis cerita</strong><span>Konsep ditulis sesuai positioning brand dan disetujui sebelum produksi.</span></div></div>
+        <div class="svc-row"><small>03</small><div><strong>Delivery siap tayang</strong><span>Master disiapkan untuk TVC, web, social, dan kebutuhan layar lainnya.</span></div></div>
+        <div class="svc-row"><small>04</small><div><strong>Lisensi jelas</strong><span>Kebutuhan musik, talent, dan lokasi ditangani dengan dokumentasi yang rapi.</span></div></div>
+        <div class="svc-row"><small>05</small><div><strong>Post-production matang</strong><span>Editing, color grading, sound design, dan motion graphics dalam satu alur kerja.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="scene alt" data-scene-slate="SCENE 03 — ALUR KERJA">
+    <div class="wrap">
+      <div class="scene-head">
+        <div>
+          <div class="scene-slate"><b>—</b> Alur Kerja</div>
+          <h2>Enam langkah,<br><em>satu standar.</em></h2>
+        </div>
+      </div>
+      <div class="workflow-strip">
+        <div class="workflow-item"><small>01</small><strong>Brief</strong></div>
+        <div class="workflow-item"><small>02</small><strong>Konsep</strong></div>
+        <div class="workflow-item"><small>03</small><strong>Pre-production</strong></div>
+        <div class="workflow-item"><small>04</small><strong>Produksi</strong></div>
+        <div class="workflow-item"><small>05</small><strong>Post</strong></div>
+        <div class="workflow-item"><small>06</small><strong>Delivery</strong></div>
+      </div>
+      <div style="margin-top:38px"><a class="pill-btn solid" href="/contact/"><span class="roll"><span data-label="Mulai Diskusi">Mulai Diskusi</span></span></a></div>
+    </div>
+  </section>
+
+</main>
+
+<a class="wa-fab" href="https://wa.me/6281214131427" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1s-.7.8-.9 1-.4.2-.6.1a6.7 6.7 0 0 1-2-1.2 7.4 7.4 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5s.2-.3.4-.4a1.6 1.6 0 0 0 .2-.4.4.4 0 0 0 0-.4c-.1-.1-.6-1.4-.8-1.9s-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.8 11.9 11.9 0 0 0 4.6 4c.6.3 1.1.4 1.5.6a3.6 3.6 0 0 0 1.7 0 2.8 2.8 0 0 0 1.8-1.3 2.3 2.3 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<footer class="cine-footer">
+  <div class="cine-footer-grid">
+    <div>
+      <a class="cine-brand" href="/" style="margin-bottom:14px">
+        <img class="cine-brand-logo" src="/assets/shl-logo-mark.png" alt="SHL">
+        <span><b>SHL CREATIVE PRODUCTION</b><i>PT SAMASTA HITAKARA LEKHA</i></span>
+      </a>
+      <p>Ekosistem kreatif untuk visual storytelling yang sinematik. Autentik. Kreatif. Tak lekang waktu.</p>
+    </div>
+    <div><b>Peta Situs</b><a href="/">Beranda</a><a href="/about/">Tentang</a><a href="/services/">Layanan</a><a href="/portfolio/">Portofolio</a><a href="/contact/">Kontak</a></div>
+    <div><b>Studio</b><p>Jl. Babakan Jeruk IV No. 9<br>Bandung, West Java, Indonesia</p><a href="tel:+6281214131427">+62 812-1413-1427</a></div>
+    <div><b>Sosial</b><a href="https://www.instagram.com/shl.creative?igsh=MTcwcHpoNGtvb2ZiYg==" target="_blank" rel="noopener">Instagram</a><a href="mailto:Shlcreativeproduction@gmail.com">Email</a></div>
+  </div>
+  <div class="cine-footer-bottom"><span>&copy; 2026 PT SAMASTA HITAKARA LEKHA. SELURUH HAK CIPTA DILINDUNGI.</span><span>AUTHENTIC / CREATIVE / TIMELESS</span></div>
+</footer>
+
+<script src="/assets/vendor/gsap.min.js"></script>
+<script src="/assets/vendor/ScrollTrigger.min.js"></script>
+<script src="/assets/vendor/lenis.min.js"></script>
+<script src="/assets/cinema.js"></script>
 </body>
 </html>

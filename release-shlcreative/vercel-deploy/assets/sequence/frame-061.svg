@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="g" gradientTransform="rotate(120.4 0.5 0.5)">
+      <stop offset="0%" stop-color="#0D0D0F"/>
+      <stop offset="55%" stop-color="rgb(13,13,26)"/>
+      <stop offset="100%" stop-color="#0D0D0F"/>
+    </linearGradient>
+    <radialGradient id="v" cx="50%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.55"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <g transform="translate(21 0)" opacity="0.5">
+    <circle cx="409.6" cy="360" r="180" fill="none" stroke="#1B4FA0" stroke-opacity="0.18" stroke-width="2"/>
+    <circle cx="870.4000000000001" cy="360" r="240" fill="none" stroke="#D32330" stroke-opacity="0.1" stroke-width="2"/>
+  </g>
+  <rect width="1280" height="720" fill="url(#v)"/>
+  <circle cx="1060" cy="36" r="5" fill="#D32330" opacity="0.35"/>
+  <text x="1080" y="41" font-family="monospace" font-size="12" letter-spacing="2" fill="#F4F3EF" fill-opacity="0.55">PLACEHOLDER 061/080</text>
+</svg>
