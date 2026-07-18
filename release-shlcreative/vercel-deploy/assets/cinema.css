@@ -85,9 +85,11 @@ button{font-family:inherit}
 .scene-menu-list a small{font-family:var(--font-mono);font-size:13px;color:var(--red);letter-spacing:2px}
 .scene-menu-list a:hover,.scene-menu-list a.active{color:var(--ink)}
 .scene-menu-foot{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:36px;flex-wrap:wrap}
-.scene-menu-foot .lang-switch{display:inline-flex;border:1px solid var(--line-strong)}
-.scene-menu-foot .lang-switch a{padding:9px 13px;font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;text-decoration:none;color:var(--muted)}
-.scene-menu-foot .lang-switch a.active{background:var(--red);color:var(--ink)}
+.lang-switch{display:inline-flex;align-items:center;border:1px solid var(--line-strong);border-radius:999px;overflow:hidden;flex:none}
+.lang-switch a{padding:9px 14px;font-family:var(--font-mono);font-size:11px;letter-spacing:1.6px;text-decoration:none;color:var(--muted)}
+.lang-switch a.active{background:var(--red);color:var(--ink)}
+.cine-header .lang-switch a{padding:0 13px;height:100%;display:flex;align-items:center}
+.cine-header .lang-switch{height:48px}
 
 /* ---- pills / links ---- */
 .pill-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 30px;border-radius:999px;border:1px solid var(--line-strong);background:transparent;color:var(--ink);text-decoration:none;text-transform:uppercase;font-family:var(--font-mono);font-weight:500;font-size:11px;letter-spacing:2px;cursor:pointer;overflow:hidden;isolation:isolate}
@@ -346,6 +348,8 @@ button{font-family:inherit}
   .cine-brand i{display:none}
   .cine-rec{display:none}
   .cine-nav-toggle{padding:9px 14px 9px 11px}
+  .cine-header .lang-switch{height:40px}
+  .cine-header .lang-switch a{padding:0 10px;font-size:10px}
   .scene-menu{padding:0 20px}
   .cine-hero{height:100dvh;scroll-snap-align:start;scroll-snap-stop:always}
   .cine-hero h1{font-size:clamp(32px,10vw,56px)}
