@@ -254,8 +254,8 @@ ${footer(lang)}
 function home(lang = "id") {
   const s = services[lang];
   const heroVideos = [
-    ["aAOPDXG4qBU", lang === "id" ? "Video 01" : "Video 01"],
-    ["HYix8fbR7yA", lang === "id" ? "Video 02" : "Video 02"],
+    ["HYix8fbR7yA", lang === "id" ? "Video 01" : "Video 01"],
+    ["aAOPDXG4qBU", lang === "id" ? "Video 02" : "Video 02"],
   ];
   const copy = lang === "id" ? {
     eyebrow: "Autentik / Kreatif / Tak Lekang Waktu",
@@ -276,14 +276,14 @@ function home(lang = "id") {
   };
   return `<main>
     <section class="hero">
-      <div class="hero-media"><iframe id="hero-video" data-videos="${esc(JSON.stringify(heroVideos.map(([id]) => id)))}" src="https://www.youtube.com/embed/${heroVideos[0][0]}?autoplay=1&mute=1&loop=1&playlist=${heroVideos[0][0]}&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="hero-media" data-video-swipe><iframe id="hero-video" data-videos="${esc(JSON.stringify(heroVideos.map(([id]) => id)))}" src="https://www.youtube.com/embed/${heroVideos[0][0]}?autoplay=1&mute=0&loop=1&playlist=${heroVideos[0][0]}&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
       <div class="wrap hero-content">
         <div class="eyebrow">${copy.eyebrow}</div>
         <h1>SHL Creative<br><span class="script">Production</span></h1>
         <p>${copy.body}</p>
         <div class="hero-actions">
           <a class="btn" href="${urlFor("portfolio", lang)}">${copy.gallery}</a>
-          <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="false" data-off="${copy.sound}" data-on="${lang === "id" ? "Suara Hidup" : "Sound On"}"><i></i><span>${copy.sound}</span></button>
+          <button class="sound-toggle on" id="sound-toggle" type="button" aria-pressed="true" data-off="${copy.sound}" data-on="${lang === "id" ? "Suara Hidup" : "Sound On"}"><i></i><span>${lang === "id" ? "Suara Hidup" : "Sound On"}</span></button>
           <div class="video-switch" aria-label="${lang === "id" ? "Pilih video pembuka" : "Choose hero video"}">
             <button type="button" data-video-step="-1" aria-label="${lang === "id" ? "Video sebelumnya" : "Previous video"}">Prev</button>
             <span id="video-label">${heroVideos[0][1]}</span>
@@ -360,6 +360,7 @@ function servicesPage(lang = "id") {
   </main>`;
 }
 
+const staticSiteJs = fs.readFileSync(path.join(root, "assets", "site.js"), "utf8");
 function portfolio(lang = "id") {
   const isId = lang === "id";
   return `<main>
@@ -405,7 +406,7 @@ function redirect(to) {
 for (const target of targets) {
   fs.mkdirSync(path.join(target, "assets"), { recursive: true });
   fs.writeFileSync(path.join(target, "assets", "site.css"), css);
-  fs.writeFileSync(path.join(target, "assets", "site.js"), js);
+  fs.writeFileSync(path.join(target, "assets", "site.js"), staticSiteJs);
   fs.writeFileSync(path.join(target, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://shlcreative.com/sitemap.xml\n");
   const sitemapUrls = ["id", "en"].flatMap((lang) => pageDefs.map((p) => `  <url><loc>https://shlcreative.com${urlFor(p.id, lang)}</loc><changefreq>weekly</changefreq><priority>${p.id === "home" ? "1.0" : "0.8"}</priority></url>`));
   fs.writeFileSync(path.join(target, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls.join("\n")}\n</urlset>\n`);
