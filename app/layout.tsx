@@ -20,13 +20,31 @@ const jetBrainsMono = JetBrains_Mono({
   weight: ['400', '500'],
 });
 
+const title = 'Galang Kharisma Rizki, S.H.';
+const description = 'Strategy Planner & Conceptor. Business Development, Branding, Ecosystem. Bandung, Indonesia.';
+const ogImage = {
+  url: '/galang-portrait.jpg',
+  width: 2430,
+  height: 4160,
+  alt: title,
+};
+
 export const metadata: Metadata = {
-  title: 'Galang Kharisma Rizki, S.H.',
-  description: 'Strategy Planner & Conceptor. Business Development, Branding, Ecosystem. Bandung, Indonesia.',
+  metadataBase: new URL('https://galaharsa.com'),
+  title,
+  description,
   openGraph: {
-    title: 'Galang Kharisma Rizki, S.H.',
-    description: 'Strategy Planner & Conceptor. Business Development, Branding, Ecosystem. Bandung, Indonesia.',
+    title,
+    description,
     type: 'website',
+    url: 'https://galaharsa.com',
+    images: [ogImage],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: [ogImage.url],
   },
 };
 
