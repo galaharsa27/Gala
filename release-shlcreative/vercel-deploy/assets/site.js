@@ -159,6 +159,7 @@
     let dragStartX = 0;
     let dragOffset = 0;
     let dragging = false;
+    const mobileQuery = window.matchMedia("(max-width: 980px)");
 
     const gap = () => Number(window.getComputedStyle(track).gap.replace("px", "")) || 0;
     const stepWidth = () => cards[0].getBoundingClientRect().width + gap();
@@ -169,7 +170,21 @@
       if (countLabel) countLabel.textContent = `${String(current + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`;
     };
 
+    const resetDesktop = () => {
+      track.style.transition = "none";
+      track.style.transform = "none";
+      track.style.cursor = "default";
+      dragOffset = 0;
+      dragging = false;
+      current = 0;
+      syncMeta();
+    };
+
     const render = (animated = true) => {
+      if (!mobileQuery.matches) {
+        resetDesktop();
+        return;
+      }
       const x = -(current * stepWidth()) + dragOffset;
       track.style.transition = animated ? "transform 560ms cubic-bezier(0.22, 1, 0.36, 1)" : "none";
       track.style.transform = `translate3d(${x}px, 0, 0)`;
@@ -177,6 +192,10 @@
     };
 
     const goTo = (next) => {
+      if (!mobileQuery.matches) {
+        resetDesktop();
+        return;
+      }
       current = Math.min(Math.max(next, 0), maxIndex);
       dragOffset = 0;
       render(true);
@@ -185,10 +204,14 @@
     const step = (dir) => goTo(current + dir);
 
     carousel.querySelectorAll("[data-leadership-step]").forEach((control) => {
-      control.addEventListener("click", () => step(Number(control.dataset.leadershipStep || 1)));
+      control.addEventListener("click", () => {
+        if (!mobileQuery.matches) return;
+        step(Number(control.dataset.leadershipStep || 1));
+      });
     });
 
     carousel.addEventListener("keydown", (event) => {
+      if (!mobileQuery.matches) return;
       if (event.key === "ArrowLeft") {
         event.preventDefault();
         step(-1);
@@ -200,6 +223,7 @@
     });
 
     carousel.addEventListener("pointerdown", (event) => {
+      if (!mobileQuery.matches) return;
       dragging = true;
       dragStartX = event.clientX;
       dragOffset = 0;
@@ -233,7 +257,7 @@
     carousel.addEventListener("pointercancel", stopDrag);
     window.addEventListener("resize", () => render(false), { passive: true });
 
-    track.style.cursor = "grab";
+    track.style.cursor = mobileQuery.matches ? "grab" : "default";
     render(false);
   });
 
