@@ -304,32 +304,150 @@ function home(lang = "id") {
   </main>`;
 }
 
+function leadershipCarousel(leaders, isId) {
+  const total = String(leaders.length).padStart(2, "0");
+  const cards = leaders
+    .map(
+      ([photo, name, role, bio, ig, web], i) =>
+        `<article class="leader-card" data-leader-card data-leader-name="${esc(name)}" aria-roledescription="slide" aria-label="${String(i + 1)} of ${leaders.length}">
+          <div class="leader-card-media"><img src="/assets/${photo}" alt="${esc(name)}" loading="lazy"></div>
+          <div class="leader-card-body">
+            <em>${esc(role)}</em>
+            <h3>${esc(name)}</h3>
+            <p class="muted">${esc(bio)}</p>
+            <div class="leader-card-links">
+              ${ig ? `<a href="${ig}" target="_blank" rel="noopener">Instagram</a>` : ""}
+              ${web ? `<a href="${web}" target="_blank" rel="noopener">Website</a>` : ""}
+            </div>
+          </div>
+        </article>`
+    )
+    .join("");
+
+  return `<div class="leadership-carousel reveal-up" data-leadership-carousel tabindex="0" aria-label="${isId ? "Carousel pimpinan" : "Leadership carousel"}">
+    <div class="leadership-viewport">
+      <div class="leadership-track" data-leadership-track>
+        ${cards}
+      </div>
+    </div>
+    <div class="leadership-controls">
+      <button class="leadership-nav" type="button" data-leadership-step="-1" aria-label="${isId ? "Pimpinan sebelumnya" : "Previous leader"}">Prev</button>
+      <div class="leadership-meta">
+        <strong data-leadership-name>${esc(leaders[0][1])}</strong>
+        <span data-leadership-count>01 / ${total}</span>
+      </div>
+      <button class="leadership-nav" type="button" data-leadership-step="1" aria-label="${isId ? "Pimpinan berikutnya" : "Next leader"}">Next</button>
+    </div>
+  </div>`;
+}
+
 function about(lang = "id") {
   const isId = lang === "id";
-  const pillars = isId ? [
-    ["01", "Ide", "Konsep yang punya niat dan alasan sebelum masuk ke bentuk visual."],
-    ["02", "Manusia", "Kolaborasi lintas disiplin bersama setiap klien dan partner."],
-    ["03", "Teknologi", "Tools dan craft yang tepat untuk mewujudkan ide dengan standar tinggi."],
-    ["04", "Seni", "Estetika yang bergerak - visual dan narasi yang dibuat untuk terasa."],
-  ] : [
-    ["01", "Ideas", "Concepts with intent - a reason to exist before a form to take."],
-    ["02", "People", "Collaboration across disciplines, and with every client we partner."],
-    ["03", "Technology", "The right tools and craft to realize ideas at the highest standard."],
-    ["04", "Art", "Aesthetics that move - visuals and narratives made to be felt."],
-  ];
+  const pillars = isId
+    ? [
+        ["01", "Ide", "Konsep yang punya niat dan alasan sebelum masuk ke bentuk visual."],
+        ["02", "Manusia", "Kolaborasi lintas disiplin bersama setiap klien dan partner."],
+        ["03", "Teknologi", "Tools dan craft yang tepat untuk mewujudkan ide dengan standar tinggi."],
+        ["04", "Seni", "Estetika yang bergerak - visual dan narasi yang dibuat untuk terasa."],
+      ]
+    : [
+        ["01", "Ideas", "Concepts with intent - a reason to exist before a form to take."],
+        ["02", "People", "Collaboration across disciplines, and with every client we partner."],
+        ["03", "Technology", "The right tools and craft to realize ideas at the highest standard."],
+        ["04", "Art", "Aesthetics that move - visuals and narratives made to be felt."],
+      ];
+
   const leaders = [
     ["leader-galang.jpg", "Galang Kharisma Rizki", isId ? "Direktur" : "Director", isId ? "Memimpin visi perusahaan, arahan kreatif, kemitraan strategis, inovasi, dan pengembangan bisnis." : "Leads company vision, creative direction, strategic partnerships, innovation, and business development.", "https://www.instagram.com/galaharsa.sh1/", "https://galaharsa.com"],
     ["leader-deni.jpg", "Deni Surachmat", isId ? "Manajer Keuangan" : "Finance Manager", isId ? "Bertanggung jawab atas perencanaan keuangan, budgeting, cash flow, accounting, dan keberlanjutan perusahaan." : "Responsible for financial planning, budgeting, cash flow, accounting, and company sustainability.", "https://www.instagram.com/denisurachmat/", ""],
     ["leader-amir.jpg", "Amir Maulana", isId ? "Manajer Operasional" : "Operations Manager", isId ? "Bertanggung jawab atas alur produksi, jadwal, eksekusi, logistik, quality assurance, dan operasional." : "Responsible for production workflow, scheduling, execution, logistics, quality assurance, and operational excellence.", "", ""],
     ["leader-uta.jpg", "Frisardi Ramadhana (Uta)", isId ? "Manajer Komunikasi Kreatif" : "Creative Communications Manager", isId ? "Mengembangkan strategi komunikasi, konsep kreatif, narasi brand, dan konten, serta menerjemahkan arahan kreatif menjadi eksekusi bersama tim produksi." : "Develops communication strategy, creative concepts, brand narratives, and content, while translating creative direction into execution with the production team.", "https://www.instagram.com/utautinn?igsh=MW55ZDlqdG8xanpjaA==", ""],
   ];
+
   return `<main>
-    <section class="page-hero section"><div class="wrap"><div class="eyebrow">${isId ? "Tentang SHL" : "About SHL"}</div><h1>${isId ? "Ekosistem kreatif tempat ide menjadi makna." : "A creative ecosystem where ideas become meaning."}</h1><p>${isId ? "PT Samasta Hitakara Lekha menyatukan ide, manusia, teknologi, dan seni dalam satu semesta kolaborasi - mitra kreatif, bukan pabrik konten." : "PT Samasta Hitakara Lekha unites ideas, people, technology, and art in one universe of collaboration - a creative partner, not a content factory."}</p><figure class="about-team about-carousel" data-carousel><div class="about-carousel-track">${aboutSlides.map(([file, alt], i) => `<img class="${i === 0 ? "active" : ""}" src="/assets/${file}" alt="${esc(alt)}">`).join("")}</div><figcaption><span>SHL Creative Production</span><span><button type="button" data-carousel-step="-1" aria-label="${isId ? "Foto sebelumnya" : "Previous photo"}">Prev</button><b data-carousel-label>01 / ${String(aboutSlides.length).padStart(2, "0")}</b><button type="button" data-carousel-step="1" aria-label="${isId ? "Foto berikutnya" : "Next photo"}">Next</button></span></figcaption></figure></div></section>
-    <section class="section alt"><div class="split wrap"><div><div class="eyebrow">${isId ? "Siapa Kami" : "Who We Are"}</div><h2>${isId ? "Tujuan dulu," : "Purpose first,"}<br><span class="script">${isId ? "craft selalu." : "craft always."}</span></h2></div><div><p class="lead">${isId ? "Kami bukan sekadar rumah produksi. Kami adalah ekosistem kreatif yang menyatukan ide, manusia, teknologi, dan seni ke dalam satu semesta kolaborasi." : "We are not just a production house. We are a creative ecosystem that brings ideas, people, technology, and art into one collaborative universe."}</p><p class="muted">${isId ? "Kami percaya setiap karya lahir dengan tujuan - bukan sekadar untuk dilihat, tetapi untuk dirasakan, dipahami, dan diberi makna. Dari keyakinan itu, kami menghadirkan visual, narasi, pengalaman, dan solusi digital yang matang sekaligus memikat." : "We believe every work is born with purpose - not only to be seen, but to be felt, understood, and given meaning. From that belief, we create visuals, narratives, experiences, and digital solutions with craft and clarity."}</p></div></div></section>
-    <section class="section blue"><div class="narrow" style="text-align:center"><div class="eyebrow">${isId ? "Filosofi Kami" : "Our Philosophy"}</div><p class="lead" style="font-size:clamp(24px,3vw,40px);font-family:Georgia,serif;font-style:italic">"${isId ? "Samasta Hitakara Lekha merupakan sebuah ekosistem kreatif yang menyatukan ide, manusia, teknologi, dan seni dalam satu semesta kolaborasi." : "Samasta Hitakara Lekha is a creative ecosystem that unites ideas, people, technology, and art in one universe of collaboration."}"</p><p class="muted">${isId ? "Bagi kami, kreativitas bukan sekadar proses menghasilkan konten. Kreativitas adalah cara menciptakan dampak. Melalui kolaborasi, inovasi, dan standar kualitas yang tinggi, kami berkomitmen menjadi mitra kreatif yang membantu mewujudkan gagasan menjadi karya yang autentik, relevan, dan memiliki nilai yang bertahan melampaui waktu." : "For us, creativity is not merely the process of producing content. It is a way to create impact. Through collaboration, innovation, and high standards, we become a creative partner that turns ideas into authentic, relevant work with long-term value."}</p></div></section>
-    <section class="section"><div class="wrap"><div class="eyebrow">${isId ? "Alasan Kami Ada" : "Why We Exist"}</div><h2>${isId ? "Mengubah ide menjadi karya yang meninggalkan" : "To turn ideas into work that leaves a"} <span class="script">${isId ? "jejak bermakna." : "meaningful trace."}</span></h2><div class="cards" style="margin-top:56px">${pillars.map(([n, t, d]) => `<div class="card"><small>${n}</small><h3>${esc(t)}</h3><p class="muted">${esc(d)}</p></div>`).join("")}</div></div></section>
-    <section class="section alt"><div class="wrap"><div class="eyebrow">${isId ? "Pimpinan" : "Leadership"}</div><h2>${isId ? "Orang-orang di balik ekosistem." : "The people behind the ecosystem."}</h2><div class="leader-grid" style="margin-top:58px">${leaders.map(([photo, name, role, bio, ig, web]) => `<div class="leader"><div class="leader-photo"><img src="/assets/${photo}" alt="${esc(name)}"></div><div class="leader-body"><h3>${esc(name)}</h3><em>${esc(role)}</em><p class="muted">${esc(bio)}</p>${ig ? `<a href="${ig}" target="_blank" rel="noopener">Instagram</a>` : ""}${web ? `<a href="${web}" target="_blank" rel="noopener">Website</a>` : ""}</div></div>`).join("")}</div></div></section>
-    <section class="section"><div class="wrap"><div class="about-cta"><img src="/assets/${aboutCtaImage}" alt="SHL Creative Production mobile production team"><div><div class="eyebrow">${isId ? "Siap Bergerak" : "Ready To Move"}</div><h2>${isId ? "Produksi yang ikut masuk ke ritme cerita." : "Production that moves with the story."}</h2><p class="muted">${isId ? "Dari konsep, set, jalan, sampai layar final - kami menyiapkan tim, kamera, dan eksekusi untuk karya yang terasa hidup." : "From concept, set, road, to final screen - we prepare the team, camera, and execution for work that feels alive."}</p><a class="btn" href="${urlFor("contact", lang)}">${isId ? "Mulai Proyek" : "Start A Project"}</a></div></div></div></section>
+    <section class="page-hero section">
+      <div class="wrap">
+        <div class="eyebrow">${isId ? "Tentang SHL" : "About SHL"}</div>
+        <h1>${isId ? "Ekosistem kreatif tempat ide menjadi makna." : "A creative ecosystem where ideas become meaning."}</h1>
+        <p>${isId ? "PT Samasta Hitakara Lekha menyatukan ide, manusia, teknologi, dan seni dalam satu semesta kolaborasi - mitra kreatif, bukan pabrik konten." : "PT Samasta Hitakara Lekha unites ideas, people, technology, and art in one universe of collaboration - a creative partner, not a content factory."}</p>
+        <figure class="about-team about-carousel reveal-up" data-carousel>
+          <div class="about-carousel-track">${aboutSlides.map(([file, alt], i) => `<img class="${i === 0 ? "active" : ""}" src="/assets/${file}" alt="${esc(alt)}">`).join("")}</div>
+          <figcaption>
+            <span>SHL Creative Production</span>
+            <span>
+              <button type="button" data-carousel-step="-1" aria-label="${isId ? "Foto sebelumnya" : "Previous photo"}">Prev</button>
+              <b data-carousel-label>01 / ${String(aboutSlides.length).padStart(2, "0")}</b>
+              <button type="button" data-carousel-step="1" aria-label="${isId ? "Foto berikutnya" : "Next photo"}">Next</button>
+            </span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="split wrap">
+        <div>
+          <div class="eyebrow">${isId ? "Siapa Kami" : "Who We Are"}</div>
+          <h2>${isId ? "Tujuan dulu," : "Purpose first,"}<br><span class="script">${isId ? "craft selalu." : "craft always."}</span></h2>
+        </div>
+        <div>
+          <p class="lead">${isId ? "Kami bukan sekadar rumah produksi. Kami adalah ekosistem kreatif yang menyatukan ide, manusia, teknologi, dan seni ke dalam satu semesta kolaborasi." : "We are not just a production house. We are a creative ecosystem that brings ideas, people, technology, and art into one collaborative universe."}</p>
+          <p class="muted">${isId ? "Kami percaya setiap karya lahir dengan tujuan - bukan sekadar untuk dilihat, tetapi untuk dirasakan, dipahami, dan diberi makna. Dari keyakinan itu, kami menghadirkan visual, narasi, pengalaman, dan solusi digital yang matang sekaligus memikat." : "We believe every work is born with purpose - not only to be seen, but to be felt, understood, and given meaning. From that belief, we create visuals, narratives, experiences, and digital solutions with craft and clarity."}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section blue section-philosophy">
+      <div class="narrow">
+        <div class="eyebrow">${isId ? "Filosofi Kami" : "Our Philosophy"}</div>
+        <p class="quote-lead">"${isId ? "Samasta Hitakara Lekha merupakan sebuah ekosistem kreatif yang menyatukan ide, manusia, teknologi, dan seni dalam satu semesta kolaborasi." : "Samasta Hitakara Lekha is a creative ecosystem that unites ideas, people, technology, and art in one universe of collaboration."}"</p>
+        <p class="muted">${isId ? "Bagi kami, kreativitas bukan sekadar proses menghasilkan konten. Kreativitas adalah cara menciptakan dampak. Melalui kolaborasi, inovasi, dan standar kualitas yang tinggi, kami berkomitmen menjadi mitra kreatif yang membantu mewujudkan gagasan menjadi karya yang autentik, relevan, dan memiliki nilai yang bertahan melampaui waktu." : "For us, creativity is not merely the process of producing content. It is a way to create impact. Through collaboration, innovation, and high standards, we become a creative partner that turns ideas into authentic, relevant work with long-term value."}</p>
+      </div>
+    </section>
+
+    <section class="section section-process">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">${isId ? "Alasan Kami Ada" : "Why We Exist"}</div>
+          <h2>${isId ? "Mengubah ide menjadi karya yang meninggalkan" : "To turn ideas into work that leaves a"} <span class="script">${isId ? "jejak bermakna." : "meaningful trace."}</span></h2>
+        </div>
+        <div class="process-grid">
+          ${pillars
+            .map(
+              ([n, t, d]) => `<article class="process-card reveal-up">
+              <small>${n}</small>
+              <h3>${esc(t)}</h3>
+              <p class="muted">${esc(d)}</p>
+            </article>`
+            )
+            .join("")}
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt section-leadership">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">${isId ? "Pimpinan" : "Leadership"}</div>
+          <h2>${isId ? "Orang-orang di balik ekosistem." : "The people behind the ecosystem."}</h2>
+        </div>
+        ${leadershipCarousel(leaders, isId)}
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="about-cta reveal-up">
+          <img src="/assets/${aboutCtaImage}" alt="SHL Creative Production mobile production team">
+          <div>
+            <div class="eyebrow">${isId ? "Siap Bergerak" : "Ready To Move"}</div>
+            <h2>${isId ? "Produksi yang ikut masuk ke ritme cerita." : "Production that moves with the story."}</h2>
+            <p class="muted">${isId ? "Dari konsep, set, jalan, sampai layar final - kami menyiapkan tim, kamera, dan eksekusi untuk karya yang terasa hidup." : "From concept, set, road, to final screen - we prepare the team, camera, and execution for work that feels alive."}</p>
+            <a class="btn" href="${urlFor("contact", lang)}">${isId ? "Mulai Proyek" : "Start A Project"}</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>`;
 }
 
@@ -362,6 +480,7 @@ function servicesPage(lang = "id") {
   </main>`;
 }
 
+const staticSiteCss = fs.readFileSync(path.join(root, "assets", "site.css"), "utf8");
 const staticSiteJs = fs.readFileSync(path.join(root, "assets", "site.js"), "utf8");
 function portfolio(lang = "id") {
   const isId = lang === "id";
@@ -407,7 +526,7 @@ function redirect(to) {
 
 for (const target of targets) {
   fs.mkdirSync(path.join(target, "assets"), { recursive: true });
-  fs.writeFileSync(path.join(target, "assets", "site.css"), css);
+  fs.writeFileSync(path.join(target, "assets", "site.css"), staticSiteCss);
   fs.writeFileSync(path.join(target, "assets", "site.js"), staticSiteJs);
   fs.writeFileSync(path.join(target, "robots.txt"), "User-agent: *\nAllow: /\nSitemap: https://shlcreative.com/sitemap.xml\n");
   const sitemapUrls = ["id", "en"].flatMap((lang) => pageDefs.map((p) => `  <url><loc>https://shlcreative.com${urlFor(p.id, lang)}</loc><changefreq>weekly</changefreq><priority>${p.id === "home" ? "1.0" : "0.8"}</priority></url>`));
