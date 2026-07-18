@@ -7,7 +7,7 @@
 
 /* Leadership desktop: static layout, no slider motion */
 .section-leadership .leadership-viewport{overflow:visible;border:0;background:transparent}
-.section-leadership .leadership-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding:0;transform:none!important}
+.section-leadership .leadership-track{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;padding:0;transform:none}
 .section-leadership .leader-card{display:grid;grid-template-columns:1fr;min-height:0;background:#0c0c0c}
 .section-leadership .leader-card-media{padding:18px 18px 0}
 .section-leadership .leader-card-media img{min-height:300px;border-radius:14px}
