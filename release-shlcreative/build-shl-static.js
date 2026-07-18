@@ -278,7 +278,7 @@ function home(lang = "id") {
   };
   return `<main>
     <section class="hero">
-      <div class="hero-media" data-video-swipe><iframe id="hero-video" data-videos="${esc(JSON.stringify(heroVideos.map(([id]) => id)))}" src="https://www.youtube.com/embed/${heroVideos[0][0]}?autoplay=1&mute=0&loop=1&playlist=${heroVideos[0][0]}&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
+      <div class="hero-media" data-video-swipe><iframe id="hero-video" data-videos="${esc(JSON.stringify(heroVideos.map(([id]) => id)))}" src="https://www.youtube.com/embed/${heroVideos[0][0]}?autoplay=1&mute=1&loop=1&playlist=${heroVideos[0][0]}&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1&disablekb=1&enablejsapi=1" title="SHL Creative Production hero video" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div>
       <div class="wrap hero-content">
         <div class="eyebrow">${copy.eyebrow}</div>
         <h1>SHL Creative<br><span class="script">Production</span></h1>
