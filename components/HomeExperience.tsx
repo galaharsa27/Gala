@@ -231,13 +231,16 @@ const galleryOrder = [
 
 const featuredEvidence = new Set(['tni.jpg', 'defence-field.jpg', 'radar.jpg']);
 
-// object-fit: cover defaults to a center crop. Most of these photos are
-// landscape/group shots where that's fine, but a few are tall portrait
-// source images placed into wide grid cells (especially the "featured"
-// 2-row tiles) - a center crop on those cuts the subject's face off the
-// top of the frame. Bias the crop toward the top for the ones affected.
-const evidenceFocalPoint: Record<string, string> = {
+// object-fit/background: cover default to a center crop. Most of these
+// photos are landscape/group shots where that's fine, but a few are tall
+// portrait source images placed into wide cells (evidence grid tiles,
+// the venture hover-preview) - a center crop on those cuts the subject's
+// face off the top of the frame. Bias the crop toward the top for the
+// ones affected. Keyed by filename so it applies wherever a given photo
+// is used.
+const photoFocalPoint: Record<string, string> = {
   'defence-field.jpg': '50% 12%',
+  'studio.jpg': '50% 8%',
 };
 
 function useScrambleName(target: string) {
@@ -513,7 +516,9 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
     const rect = rootRef.current?.getBoundingClientRect();
     if (!rect) return;
-    previewRef.current.style.backgroundImage = `url(${ventureThumb[kind]})`;
+    const thumb = ventureThumb[kind];
+    previewRef.current.style.backgroundImage = `url(${thumb})`;
+    previewRef.current.style.backgroundPosition = photoFocalPoint[thumb.split('/').pop() ?? ''] ?? '50% 50%';
     previewRef.current.style.transform = `translate(${e.clientX - rect.left + 24}px, ${e.clientY - rect.top - 90}px)`;
     previewRef.current.style.opacity = '1';
   }
@@ -728,7 +733,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                   alt={`${item.label} — Galang Kharisma Rizki portfolio`}
                   loading="lazy"
                   decoding="async"
-                  style={{ objectPosition: evidenceFocalPoint[item.src.split('/').pop() ?? ''] ?? '50% 50%' }}
+                  style={{ objectPosition: photoFocalPoint[item.src.split('/').pop() ?? ''] ?? '50% 50%' }}
                 />
                 <span className="evidence-view mono">{t.viewLabel}</span>
                 <span className="evidence-caption mono">
