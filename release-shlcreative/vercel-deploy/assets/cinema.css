@@ -253,8 +253,8 @@ button{font-family:inherit}
 .lead-item em{font-style:normal;font-family:var(--font-mono);font-size:10px;letter-spacing:1.4px;color:var(--red);text-transform:uppercase;display:block;margin-top:5px}
 @media(max-width:980px){
   .lead-grid{gap:8px}
-  .lead-item h3{font-size:11px}
-  .lead-item em{display:none}
+  .lead-item h3{font-size:10.5px}
+  .lead-item em{font-size:7.5px;letter-spacing:.6px;margin-top:4px}
 }
 
 /* ---- trust + CTA ---- */
