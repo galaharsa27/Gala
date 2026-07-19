@@ -231,6 +231,15 @@ const galleryOrder = [
 
 const featuredEvidence = new Set(['tni.jpg', 'defence-field.jpg', 'radar.jpg']);
 
+// object-fit: cover defaults to a center crop. Most of these photos are
+// landscape/group shots where that's fine, but a few are tall portrait
+// source images placed into wide grid cells (especially the "featured"
+// 2-row tiles) - a center crop on those cuts the subject's face off the
+// top of the frame. Bias the crop toward the top for the ones affected.
+const evidenceFocalPoint: Record<string, string> = {
+  'defence-field.jpg': '50% 12%',
+};
+
 function useScrambleName(target: string) {
   const [display, setDisplay] = useState(target);
   const ran = useRef(false);
@@ -714,7 +723,13 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                 onClick={() => setLightboxIndex(index)}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={item.src} alt={`${item.label} — Galang Kharisma Rizki portfolio`} loading="lazy" decoding="async" />
+                <img
+                  src={item.src}
+                  alt={`${item.label} — Galang Kharisma Rizki portfolio`}
+                  loading="lazy"
+                  decoding="async"
+                  style={{ objectPosition: evidenceFocalPoint[item.src.split('/').pop() ?? ''] ?? '50% 50%' }}
+                />
                 <span className="evidence-view mono">{t.viewLabel}</span>
                 <span className="evidence-caption mono">
                   <b>{item.code}</b> {item.label}
