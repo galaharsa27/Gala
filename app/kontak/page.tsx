@@ -1,13 +1,14 @@
 import PageShell from '@/components/PageShell';
+import { contact } from '@/data/profile';
 
-const whatsappUrl = 'https://wa.me/6281214131427?text=Halo%20Galang%2C%20saya%20ingin%20berkolaborasi.';
+const whatsappUrl = `${contact.whatsappUrl}?text=Halo%20Galang%2C%20saya%20ingin%20berkolaborasi.`;
 
 export default function ContactPage() {
   return (
     <PageShell
       eyebrow="Kontak"
       title="Tersedia untuk kolaborasi & konsultasi"
-      description="Mulai percakapan dengan mengirimkan brief singkat — scope, timeline, dan tujuan kolaborasi."
+      description="Mulai percakapan dengan mengirimkan brief singkat - scope, timeline, dan tujuan kolaborasi."
     >
       <div className="space-y-10">
         {/* CTA utama */}
@@ -28,7 +29,7 @@ export default function ContactPage() {
               WhatsApp
             </a>
             <a
-              href="mailto:galaharsa.27@gmail.com"
+              href={`mailto:${contact.email}`}
               data-cursor-hover
               className="inline-flex items-center gap-2 rounded-full border border-white/10 px-8 py-4 text-sm uppercase tracking-[0.28em] text-white/70 transition hover:border-white/30 hover:text-white"
             >
@@ -41,11 +42,11 @@ export default function ContactPage() {
         <div className="grid gap-6 sm:grid-cols-2">
           <div className="rounded-[2rem] border border-white/10 bg-ink/90 p-8">
             <p className="text-sm uppercase tracking-[0.3em] text-accent">WhatsApp</p>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-4 block text-xl font-semibold text-white transition hover:text-accent">+62 812 1413 1427</a>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-4 block text-xl font-semibold text-white transition hover:text-accent">{contact.whatsappDisplay}</a>
           </div>
           <div className="rounded-[2rem] border border-white/10 bg-ink/90 p-8">
             <p className="text-sm uppercase tracking-[0.3em] text-accent">Email</p>
-            <a href="mailto:galaharsa.27@gmail.com" className="mt-4 block text-xl font-semibold text-white transition hover:text-accent">galaharsa.27@gmail.com</a>
+            <a href={`mailto:${contact.email}`} className="mt-4 block text-xl font-semibold text-white transition hover:text-accent">{contact.email}</a>
           </div>
         </div>
 
@@ -53,10 +54,10 @@ export default function ContactPage() {
         <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8">
           <p className="text-sm uppercase tracking-[0.3em] text-accent">Instagram</p>
           <div className="mt-6 flex flex-wrap gap-4">
-            <a href="https://www.instagram.com/galaharsa.sh1/" target="_blank" rel="noopener noreferrer" data-cursor-hover className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm text-white/70 transition hover:border-accent hover:text-accent">
+            <a href={contact.instagram[0]} target="_blank" rel="noopener noreferrer" data-cursor-hover className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm text-white/70 transition hover:border-accent hover:text-accent">
               @galaharsa.sh1
             </a>
-            <a href="https://www.instagram.com/shl.creative/" target="_blank" rel="noopener noreferrer" data-cursor-hover className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm text-white/70 transition hover:border-accent hover:text-accent">
+            <a href={contact.instagram[1]} target="_blank" rel="noopener noreferrer" data-cursor-hover className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2.5 text-sm text-white/70 transition hover:border-accent hover:text-accent">
               @shl.creative
             </a>
           </div>
@@ -70,7 +71,7 @@ export default function ContactPage() {
           </div>
           <div className="rounded-[2rem] border border-white/10 bg-ink/90 p-8">
             <p className="text-sm uppercase tracking-[0.3em] text-accent">Proses</p>
-            <p className="mt-4 text-base leading-8 text-white/70">Brief → alignment → proposal yang fokus dan terarah.</p>
+            <p className="mt-4 text-base leading-8 text-white/70">Brief, alignment, lalu proposal yang fokus dan terarah.</p>
           </div>
         </div>
       </div>

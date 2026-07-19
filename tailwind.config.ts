@@ -8,14 +8,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#050505',
-        paper: '#f5f5f0',
-        accent: '#e52729'
+        ink: '#080808',
+        paper: '#f4f1ea',
+        accent: '#d71920'
       },
       fontFamily: {
-        display: ['var(--font-barlow)', 'sans-serif'],
-        body: ['var(--font-barlow-text)', 'sans-serif'],
-        mono: ['var(--font-jetbrains)', 'monospace']
+        display: ['var(--font-d)', 'sans-serif'],
+        body: ['var(--font-b)', 'sans-serif'],
+        mono: ['var(--font-m)', 'monospace']
       }
     }
   },
