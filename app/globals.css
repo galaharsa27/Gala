@@ -522,22 +522,22 @@ img { max-width: 100%; display: block; }
 .evidence { padding: clamp(50px, 9vh, 96px) 0 clamp(20px, 3vh, 32px); border-top: 1px solid var(--hairline); }
 .evidence-grid {
   display: grid;
+  grid-auto-flow: dense;
   grid-template-columns: repeat(6, 1fr);
+  grid-auto-rows: 240px;
   gap: 4px;
   padding: 0 var(--edge);
 }
 .evidence-item {
   position: relative;
   grid-column: span 2;
-  aspect-ratio: 4 / 3;
   border: none;
   padding: 0;
   cursor: pointer;
   overflow: hidden;
   background: var(--panel);
 }
-.evidence-item.is-featured { grid-column: span 3; aspect-ratio: 3 / 2; }
-.evidence-item:nth-child(7) { grid-column: span 3; }
+.evidence-item.is-featured { grid-column: span 3; grid-row: span 2; }
 .evidence-item img {
   width: 100%;
   height: 100%;
@@ -670,15 +670,12 @@ img { max-width: 100%; display: block; }
   .entity-body { display: block !important; animation: none; }
 
   .timeline-entry { grid-template-columns: 140px 1fr; }
-
-  .evidence-item:nth-child(7) { grid-column: span 2; }
 }
 
 @media (min-width: 1200px) {
-  .evidence-grid { grid-template-columns: repeat(8, 1fr); }
+  .evidence-grid { grid-template-columns: repeat(8, 1fr); grid-auto-rows: 220px; }
   .evidence-item { grid-column: span 2; }
-  .evidence-item.is-featured { grid-column: span 4; }
-  .evidence-item:nth-child(7) { grid-column: span 2; }
+  .evidence-item.is-featured { grid-column: span 4; grid-row: span 2; }
 }
 
 /* ================= MOBILE — page to page ================= */
@@ -709,10 +706,9 @@ img { max-width: 100%; display: block; }
   .venture-row:last-child { border-bottom: none; }
   .venture-preview { display: none; }
 
-  .evidence-grid { grid-template-columns: repeat(4, 1fr); padding: 0 12px; gap: 3px; }
+  .evidence-grid { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 42vw; padding: 0 12px; gap: 3px; }
   .evidence-item { grid-column: span 2; }
-  .evidence-item.is-featured { grid-column: span 4; aspect-ratio: 16/10; }
-  .evidence-item:nth-child(7) { grid-column: span 2; }
+  .evidence-item.is-featured { grid-column: span 4; grid-row: span 1; aspect-ratio: 16/10; }
   .evidence-view { display: none; }
 
   .metric-row { gap: 32px; }
