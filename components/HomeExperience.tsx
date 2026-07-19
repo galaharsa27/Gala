@@ -393,27 +393,51 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
       }
 
       const ctx = gsap.context(() => {
-        // metric count-up
-        document.querySelectorAll<HTMLElement>('[data-metric-value]').forEach((el) => {
-          const target = Number(el.dataset.metricValue);
-          const suffix = el.dataset.metricSuffix ?? '';
-          const counter = { value: 0 };
-          ScrollTrigger.create({
-            trigger: el,
-            start: 'top 85%',
-            once: true,
-            onEnter: () => {
-              gsap.to(counter, {
-                value: target,
-                duration: reduced ? 0 : 1.1,
-                ease: 'power2.out',
-                onUpdate: () => {
-                  el.textContent = `${Math.round(counter.value)}${suffix}`;
-                },
-              });
-            },
-          });
-        });
+        // One-shot reveals (evidence tiles, section headings/metrics) use
+        // IntersectionObserver for real scroll interactions. Note this is a
+        // pure enhancement: every one of these elements is fully correct at
+        // its default (unrevealed) CSS state, because no automated capture
+        // tool can be trusted to fire the events this depends on — some
+        // full-page screenshot tools composite content beyond the viewport
+        // without ever changing anything JS can observe. Content must never
+        // depend on this code running to be correct; it only makes real,
+        // interactive scrolling nicer.
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const el = entry.target as HTMLElement;
+              io.unobserve(el);
+
+              if (el.hasAttribute('data-evidence-item')) {
+                const index = Number(el.dataset.evidenceIndex ?? 0);
+                gsap.fromTo(
+                  el,
+                  { autoAlpha: 0, y: 28, clipPath: 'inset(12% 0 12% 0)' },
+                  {
+                    autoAlpha: 1,
+                    y: 0,
+                    clipPath: 'inset(0% 0 0% 0)',
+                    duration: reduced ? 0.2 : 0.7,
+                    delay: reduced ? 0 : (index % 4) * 0.05,
+                    ease: 'power2.out',
+                  }
+                );
+              } else if (el.hasAttribute('data-reveal')) {
+                gsap.fromTo(
+                  el,
+                  { autoAlpha: 0, y: 18 },
+                  { autoAlpha: 1, y: 0, duration: reduced ? 0.2 : 0.6, ease: 'power2.out' }
+                );
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -8% 0px' }
+        );
+        document
+          .querySelectorAll('[data-evidence-item], [data-reveal]')
+          .forEach((el) => io.observe(el));
+        cleanupFns.push(() => io.disconnect());
 
         // method connecting line draw
         const methodLine = document.querySelector<HTMLElement>('[data-method-line]');
@@ -465,37 +489,6 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           });
         });
 
-        // evidence reveal
-        document.querySelectorAll<HTMLElement>('[data-evidence-item]').forEach((el, index) => {
-          gsap.fromTo(
-            el,
-            { autoAlpha: 0, y: 28, clipPath: 'inset(12% 0 12% 0)' },
-            {
-              autoAlpha: 1,
-              y: 0,
-              clipPath: 'inset(0% 0 0% 0)',
-              duration: reduced ? 0.2 : 0.7,
-              delay: reduced ? 0 : (index % 4) * 0.05,
-              ease: 'power2.out',
-              scrollTrigger: { trigger: el, start: 'top 90%', once: true },
-            }
-          );
-        });
-
-        // section headings soft reveal
-        document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
-          gsap.fromTo(
-            el,
-            { autoAlpha: 0, y: 18 },
-            {
-              autoAlpha: 1,
-              y: 0,
-              duration: reduced ? 0.2 : 0.6,
-              ease: 'power2.out',
-              scrollTrigger: { trigger: el, start: 'top 88%', once: true },
-            }
-          );
-        });
       }, rootRef);
 
       cleanupFns.push(() => ctx.revert());
@@ -589,8 +582,8 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
           <p className="profile-statement" data-reveal>{t.statement}</p>
           <div className="metric-row">
             {t.metrics.map((metric) => (
-              <div className="metric" key={metric.label}>
-                <strong data-metric-value={metric.value} data-metric-suffix={metric.suffix}>0{metric.suffix}</strong>
+              <div className="metric" key={metric.label} data-reveal>
+                <strong>{metric.value}{metric.suffix}</strong>
                 <span className="mono">{metric.label}</span>
               </div>
             ))}
@@ -717,6 +710,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
                 key={item.src}
                 className={`evidence-item${featuredEvidence.has(item.src.split('/').pop() ?? '') ? ' is-featured' : ''}`}
                 data-evidence-item
+                data-evidence-index={index}
                 onClick={() => setLightboxIndex(index)}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
