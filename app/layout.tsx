@@ -68,14 +68,6 @@ export const metadata: Metadata = {
     description: homepageMetadata.id.description,
     url: `${canonicalBaseUrl}/`,
     siteName: 'Galang Kharisma Rizki',
-    images: [
-      {
-        url: '/assets/g/studio.jpg',
-        width: 1200,
-        height: 1500,
-        alt: 'Portrait of Galang Kharisma Rizki',
-      },
-    ],
     locale: 'id_ID',
     type: 'website',
   },
@@ -83,7 +75,6 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: homepageMetadata.id.title,
     description: homepageMetadata.id.description,
-    images: ['/assets/g/studio.jpg'],
   },
   robots: {
     index: true,

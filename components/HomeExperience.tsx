@@ -1,3 +1,11 @@
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Lenis from 'lenis';
+import DossierIntro from './DossierIntro';
+import Lightbox, { type LightboxItem } from './Lightbox';
 import {
   canonicalBaseUrl,
   careerChapters,
@@ -7,6 +15,13 @@ import {
   selectedWorks,
   type Locale,
 } from '@/data/profile';
+
+const ventureThumb: Record<string, string> = {
+  'creative-production': '/assets/g/studio.jpg',
+  'live-challenge-platform': '/assets/g/group.jpg',
+  'original-ip': '/assets/g/produksi.jpg',
+  'motorcycle-performance': '/assets/g/fatboy.jpg',
+};
 
 const content = {
   id: {
@@ -26,147 +41,42 @@ const content = {
     secondaryCta: 'Lihat bukti',
     location: 'Bandung, Indonesia',
     availability: 'Terbuka untuk kolaborasi strategis',
+    subjectLabel: 'SUBJECT: STRATEGIST',
+    coordinates: '6.9175° S, 107.6191° E',
     statement:
       'Fokusnya sederhana: membaca masalah dengan jernih, membentuk arah yang dipercaya, lalu menggerakkan tim sampai strategi berubah menjadi hasil nyata.',
     metrics: [
-      { value: '10+', label: 'Tahun Pengalaman' },
-      { value: '4', label: 'Perusahaan' },
-      { value: '4', label: 'Ventures' },
+      { value: 10, suffix: '+', label: 'Tahun Pengalaman' },
+      { value: 4, suffix: '', label: 'Perusahaan' },
+      { value: 4, suffix: '', label: 'Ventures' },
     ],
-    operatingEyebrow: 'Cara Kerja',
+    operatingEyebrow: 'Metode 01—03',
     operatingTitle: 'Dari masalah kompleks menjadi bisnis yang bergerak.',
     principles: [
-      {
-        title: 'Membaca pola',
-        text: 'Saya melihat konteks bisnis, budaya, orang, dan pasar sebelum menentukan apa yang perlu dibangun.',
-      },
-      {
-        title: 'Membentuk narasi',
-        text: 'Saya mengubah ide yang masih tersebar menjadi arah yang bisa dipahami, dipercaya, dan dijalankan.',
-      },
-      {
-        title: 'Menggerakkan sistem',
-        text: 'Saya bekerja lintas founder, operator, kreatif, klien, dan tim teknis sampai eksekusi berjalan.',
-      },
+      { title: 'Membaca pola', text: 'Saya melihat konteks bisnis, budaya, orang, dan pasar sebelum menentukan apa yang perlu dibangun.' },
+      { title: 'Membentuk narasi', text: 'Saya mengubah ide yang masih tersebar menjadi arah yang bisa dipahami, dipercaya, dan dijalankan.' },
+      { title: 'Menggerakkan sistem', text: 'Saya bekerja lintas founder, operator, kreatif, klien, dan tim teknis sampai eksekusi berjalan.' },
     ],
-    companiesEyebrow: 'Perusahaan',
+    companiesEyebrow: 'Entitas — Berkas 04',
     companiesTitle: 'Ekosistem venture untuk strategi, produksi, intelligence, dan energi.',
-    careerEyebrow: 'Perjalanan',
+    careerEyebrow: 'Linimasa — Berkas 05',
     careerTitle: 'Pengalaman lapangan yang membentuk cara membangun.',
-    workEyebrow: 'Selected Ventures',
+    workEyebrow: 'Ventures — Berkas 06',
     workTitle: 'Ideas built into brands, products, and experiences.',
-    evidenceEyebrow: 'Bukti Visual',
+    visitLabel: 'Visit Website',
+    evidenceEyebrow: 'Field Evidence — Berkas 07',
     evidenceTitle: 'Lapangan, institusi, produksi, komunitas.',
+    viewLabel: 'LIHAT',
     contactEyebrow: 'Kontak',
     contactTitle: 'Libatkan saya saat masalahnya butuh arah, bukan sekadar tampilan.',
+    stampEngagement: 'OPEN FOR ENGAGEMENT',
     emailCta: 'Email',
     whatsappCta: 'WhatsApp',
-    footerLeft: '(c) 2026 Galaharsa - Strategic venture building and transformation',
+    footerLeft: '© 2026 Galaharsa — Strategic venture building and transformation',
+    footerDossier: 'DOSSIER NO. GKR-2026',
     footerRight: 'Bandung / Indonesia',
-    companies: [
-      {
-        code: 'RFA',
-        name: 'PT. Revolusi Fundamental Asia',
-        role: 'Founder & Direktur',
-        focus: 'Strategic consulting, integrasi AI, ERP/CRM, transformasi institusi, dan akses pengadaan internasional.',
-        scope: [
-          'Defence & militer',
-          'Weibel Doppler Radar',
-          'Military jammer',
-          'Body-worn camera',
-          'Teknologi rugged',
-          'HoloLens, Getac, Toughbook',
-          'Aviasi 100+ brand',
-          'POA, CoO, manufacturer statement',
-          'and many more',
-        ],
-      },
-      {
-        code: 'SHL',
-        name: 'PT. Samasta Hitakara Lekha',
-        role: 'Direktur & Creative Director',
-        focus: 'Creative production, brand identity, video komersial, company profile, event concept, dan campaign strategy.',
-        scope: ['Brand identity', 'Commercial video', 'Company profile', 'Webseries', 'Event concept', 'Campaign storytelling', 'and many more'],
-      },
-      {
-        code: 'KSI',
-        name: 'PT. Kawan Secuan Indonesia',
-        role: 'Komisaris Utama & Chief Conceptor',
-        focus: 'OSTKA, IMA, dan Red Eye: targeting berbasis data, analitik perilaku komunitas, dan market intelligence.',
-        scope: ['OSTKA', 'IMA', 'Red Eye', 'Lead targeting', 'Community behavior analytics', 'Market intelligence', 'and many more'],
-      },
-      {
-        code: 'SEN',
-        name: 'PT. Suplai Energi Nusantara',
-        role: 'Direktur',
-        focus: 'Rantai pasok energi dan infrastruktur, pemetaan kebutuhan institusi, dan distribusi terintegrasi.',
-        scope: ['Energy supply chain', 'Infrastructure needs mapping', 'Integrated distribution', 'Institutional supply', 'and many more'],
-      },
-    ],
-    career: [
-      {
-        period: '2015 - 2019',
-        title: 'Fondasi kreatif, brand, dan event',
-        text: 'Creative direction, art direction, brand consulting, studio building, dan pengembangan konsep event.',
-        roles: [
-          'Creative Director - I AM Management',
-          'Art Director - Blacktiger EO',
-          'Branding Consultant - Roomtoday DC',
-          'Founder - SMMR Studio',
-          'Founder - Mankey Brothers',
-        ],
-      },
-      {
-        period: '2018 - 2020',
-        title: 'Komunikasi politik dan strategi lapangan',
-        text: 'Campaign operations, koordinasi stakeholder, dan komunikasi dalam tekanan waktu serta sorotan publik.',
-        roles: [
-          'Creative IT - Kampanye Nasional Bandung Barat',
-          'Project Manager - Tim Pemenangan Walikota Bukittinggi',
-          'Strategi komunikasi, koordinasi lapangan, dan relasi stakeholder',
-          'and many more',
-        ],
-      },
-      {
-        period: '2019 - 2025',
-        title: 'Business development teknologi pertahanan',
-        text: 'Wakil Direktur, BD & Product Lead di PT. Nexin Maya Vision untuk pasar institusi pertahanan.',
-        roles: [
-          'Wakil Direktur - PT. Nexin Maya Vision',
-          'Business Development & Product Lead',
-          'Branding produk, client management, dan pengembangan pasar',
-        ],
-      },
-      {
-        period: '2022 - sekarang',
-        title: 'Membangun perusahaan',
-        text: 'Founder, direktur, komisaris, dan konseptor lintas strategi, creative production, intelligence, dan energi.',
-        roles: [
-          'Founder & Direktur - PT. Revolusi Fundamental Asia',
-          'Direktur & Creative Director - PT. Samasta Hitakara Lekha',
-          'Komisaris Utama & Chief Conceptor - PT. Kawan Secuan Indonesia',
-          'Direktur - PT. Suplai Energi Nusantara',
-        ],
-      },
-    ],
-    gallery: [
-      { src: '/assets/g/studio.jpg', label: 'Potret studio' },
-      { src: '/assets/g/group.jpg', label: 'Kepemimpinan komunitas' },
-      { src: '/assets/g/hero-helmet.jpg', label: 'Riding malam' },
-      { src: '/assets/g/fatboy.jpg', label: 'Budaya riding' },
-      { src: '/assets/g/tni.jpg', label: 'Konteks lapangan TNI AD' },
-      { src: '/assets/g/speaking.jpg', label: 'Kepemimpinan acara' },
-      { src: '/assets/g/defence-field.jpg', label: 'Kerja lapangan defence' },
-      { src: '/assets/g/nexin.jpg', label: 'Konteks kerja Nexin' },
-      { src: '/assets/g/radar.jpg', label: 'Radar dan teknologi defence' },
-      { src: '/assets/g/secuan.jpg', label: 'Tim Kawan Secuan' },
-      { src: '/assets/g/night-event.jpg', label: 'Koordinasi acara' },
-      { src: '/assets/g/patch.jpg', label: 'Identitas komunitas' },
-      { src: '/assets/g/forest.jpg', label: 'Momen lapangan' },
-      { src: '/assets/g/littlebike.jpg', label: 'Arsip riding personal' },
-      { src: '/assets/g/batik-tni.jpg', label: 'Konteks klien institusi' },
-      { src: '/assets/g/produksi.jpg', label: 'Arah produksi' },
-    ],
+    moreLabel: 'Lihat selengkapnya',
+    moreRoles: '+ lainnya',
   },
   en: {
     htmlLang: 'en',
@@ -185,147 +95,42 @@ const content = {
     secondaryCta: 'View evidence',
     location: 'Bandung, Indonesia',
     availability: 'Available for strategic collaboration',
+    subjectLabel: 'SUBJECT: STRATEGIST',
+    coordinates: '6.9175° S, 107.6191° E',
     statement:
       'The work is simple to explain and hard to execute: clarify the problem, shape trusted direction, and move teams until strategy becomes measurable progress.',
     metrics: [
-      { value: '10+', label: 'Years Experience' },
-      { value: '4', label: 'Companies' },
-      { value: '4', label: 'Ventures' },
+      { value: 10, suffix: '+', label: 'Years Experience' },
+      { value: 4, suffix: '', label: 'Companies' },
+      { value: 4, suffix: '', label: 'Ventures' },
     ],
-    operatingEyebrow: 'Operating System',
+    operatingEyebrow: 'Method 01—03',
     operatingTitle: 'From complex problems to ventures that move.',
     principles: [
-      {
-        title: 'Read the pattern',
-        text: 'I study the business, culture, people, and market before deciding what needs to be built.',
-      },
-      {
-        title: 'Shape the narrative',
-        text: 'I turn scattered ambition into a direction people can understand, believe, and execute.',
-      },
-      {
-        title: 'Move the system',
-        text: 'I work across founders, operators, creatives, clients, and technical teams until execution moves.',
-      },
+      { title: 'Read the pattern', text: 'I study the business, culture, people, and market before deciding what needs to be built.' },
+      { title: 'Shape the narrative', text: 'I turn scattered ambition into a direction people can understand, believe, and execute.' },
+      { title: 'Move the system', text: 'I work across founders, operators, creatives, clients, and technical teams until execution moves.' },
     ],
-    companiesEyebrow: 'Companies',
+    companiesEyebrow: 'Entities — File 04',
     companiesTitle: 'A venture ecosystem across strategy, production, intelligence, and energy.',
-    careerEyebrow: 'Trajectory',
+    careerEyebrow: 'Timeline — File 05',
     careerTitle: 'Field experience that shapes how ventures are built.',
-    workEyebrow: 'Selected Ventures',
+    workEyebrow: 'Ventures — File 06',
     workTitle: 'Ideas built into brands, products, and experiences.',
-    evidenceEyebrow: 'Visual Evidence',
+    visitLabel: 'Visit Website',
+    evidenceEyebrow: 'Field Evidence — File 07',
     evidenceTitle: 'Field, institution, production, community.',
+    viewLabel: 'VIEW',
     contactEyebrow: 'Contact',
     contactTitle: 'Bring me in when the problem needs direction, not decoration.',
+    stampEngagement: 'OPEN FOR ENGAGEMENT',
     emailCta: 'Email',
     whatsappCta: 'WhatsApp',
-    footerLeft: '(c) 2026 Galaharsa - Strategic venture building and transformation',
+    footerLeft: '© 2026 Galaharsa — Strategic venture building and transformation',
+    footerDossier: 'DOSSIER NO. GKR-2026',
     footerRight: 'Bandung / Indonesia',
-    companies: [
-      {
-        code: 'RFA',
-        name: 'PT. Revolusi Fundamental Asia',
-        role: 'Founder & Director',
-        focus: 'Strategic consulting, AI integration, ERP/CRM, institutional transformation, and international procurement access.',
-        scope: [
-          'Defence & military',
-          'Weibel Doppler Radar',
-          'Military jammer',
-          'Body-worn camera',
-          'Rugged technology',
-          'HoloLens, Getac, Toughbook',
-          '100+ aviation brands',
-          'POA, CoO, manufacturer statement',
-          'and many more',
-        ],
-      },
-      {
-        code: 'SHL',
-        name: 'PT. Samasta Hitakara Lekha',
-        role: 'Director & Creative Director',
-        focus: 'Creative production, brand identity, commercial video, company profile, event concept, and campaign strategy.',
-        scope: ['Brand identity', 'Commercial video', 'Company profile', 'Webseries', 'Event concept', 'Campaign storytelling', 'and many more'],
-      },
-      {
-        code: 'KSI',
-        name: 'PT. Kawan Secuan Indonesia',
-        role: 'President Commissioner & Chief Conceptor',
-        focus: 'OSTKA, IMA, and Red Eye: data-led targeting, community behavior analytics, and market intelligence.',
-        scope: ['OSTKA', 'IMA', 'Red Eye', 'Lead targeting', 'Community behavior analytics', 'Market intelligence', 'and many more'],
-      },
-      {
-        code: 'SEN',
-        name: 'PT. Suplai Energi Nusantara',
-        role: 'Director',
-        focus: 'Energy and infrastructure supply chain, institutional needs mapping, and integrated distribution.',
-        scope: ['Energy supply chain', 'Infrastructure needs mapping', 'Integrated distribution', 'Institutional supply', 'and many more'],
-      },
-    ],
-    career: [
-      {
-        period: '2015 - 2019',
-        title: 'Creative, brand, and event foundation',
-        text: 'Creative direction, art direction, brand consulting, studio building, and event concept development.',
-        roles: [
-          'Creative Director - I AM Management',
-          'Art Director - Blacktiger EO',
-          'Branding Consultant - Roomtoday DC',
-          'Founder - SMMR Studio',
-          'Founder - Mankey Brothers',
-        ],
-      },
-      {
-        period: '2018 - 2020',
-        title: 'Political communication and field strategy',
-        text: 'Campaign operations, stakeholder coordination, and communication work under pressure and public scrutiny.',
-        roles: [
-          'Creative IT - National Campaign, Bandung Barat',
-          'Project Manager - Bukittinggi Mayoral Campaign Team',
-          'Communication strategy, field coordination, and stakeholder relations',
-          'and many more',
-        ],
-      },
-      {
-        period: '2019 - 2025',
-        title: 'Defence technology business development',
-        text: 'Deputy Director, BD & Product Lead at PT. Nexin Maya Vision, working with institutional defence markets.',
-        roles: [
-          'Deputy Director - PT. Nexin Maya Vision',
-          'Business Development & Product Lead',
-          'Product branding, client management, and market development',
-        ],
-      },
-      {
-        period: '2022 - now',
-        title: 'Company building',
-        text: 'Founder, director, commissioner, and conceptor across strategy, creative production, intelligence, and energy.',
-        roles: [
-          'Founder & Director - PT. Revolusi Fundamental Asia',
-          'Director & Creative Director - PT. Samasta Hitakara Lekha',
-          'President Commissioner & Chief Conceptor - PT. Kawan Secuan Indonesia',
-          'Director - PT. Suplai Energi Nusantara',
-        ],
-      },
-    ],
-    gallery: [
-      { src: '/assets/g/studio.jpg', label: 'Studio portrait' },
-      { src: '/assets/g/group.jpg', label: 'Community leadership' },
-      { src: '/assets/g/hero-helmet.jpg', label: 'Night ride' },
-      { src: '/assets/g/fatboy.jpg', label: 'Riding culture' },
-      { src: '/assets/g/tni.jpg', label: 'TNI AD field context' },
-      { src: '/assets/g/speaking.jpg', label: 'Event leadership' },
-      { src: '/assets/g/defence-field.jpg', label: 'Defence field work' },
-      { src: '/assets/g/nexin.jpg', label: 'Nexin work context' },
-      { src: '/assets/g/radar.jpg', label: 'Radar and defence technology' },
-      { src: '/assets/g/secuan.jpg', label: 'Kawan Secuan team' },
-      { src: '/assets/g/night-event.jpg', label: 'Event coordination' },
-      { src: '/assets/g/patch.jpg', label: 'Community identity' },
-      { src: '/assets/g/forest.jpg', label: 'Candid moment' },
-      { src: '/assets/g/littlebike.jpg', label: 'Personal riding archive' },
-      { src: '/assets/g/batik-tni.jpg', label: 'Institutional client context' },
-      { src: '/assets/g/produksi.jpg', label: 'Production direction' },
-    ],
+    moreLabel: 'View more',
+    moreRoles: '+ more',
   },
 } satisfies Record<Locale, {
   htmlLang: string;
@@ -337,8 +142,10 @@ const content = {
   secondaryCta: string;
   location: string;
   availability: string;
+  subjectLabel: string;
+  coordinates: string;
   statement: string;
-  metrics: Array<{ value: string; label: string }>;
+  metrics: Array<{ value: number; suffix: string; label: string }>;
   operatingEyebrow: string;
   operatingTitle: string;
   principles: Array<{ title: string; text: string }>;
@@ -348,23 +155,132 @@ const content = {
   careerTitle: string;
   workEyebrow: string;
   workTitle: string;
+  visitLabel: string;
   evidenceEyebrow: string;
   evidenceTitle: string;
+  viewLabel: string;
   contactEyebrow: string;
   contactTitle: string;
+  stampEngagement: string;
   emailCta: string;
   whatsappCta: string;
   footerLeft: string;
+  footerDossier: string;
   footerRight: string;
-  companies: Array<{ code: string; name: string; role: string; focus: string; scope: string[] }>;
-  career: Array<{ period: string; title: string; text: string; roles: string[] }>;
-  gallery: Array<{ src: string; label: string }>;
+  moreLabel: string;
+  moreRoles: string;
 }>;
+
+const galleryLabels: Record<Locale, Record<string, string>> = {
+  id: {
+    'studio.jpg': 'Potret studio',
+    'group.jpg': 'Kepemimpinan komunitas',
+    'hero-helmet.jpg': 'Riding malam',
+    'fatboy.jpg': 'Budaya riding',
+    'tni.jpg': 'Konteks lapangan TNI AD',
+    'speaking.jpg': 'Kepemimpinan acara',
+    'defence-field.jpg': 'Kerja lapangan defence',
+    'nexin.jpg': 'Konteks kerja Nexin',
+    'radar.jpg': 'Radar dan teknologi defence',
+    'secuan.jpg': 'Tim Kawan Secuan',
+    'night-event.jpg': 'Koordinasi acara',
+    'patch.jpg': 'Identitas komunitas',
+    'forest.jpg': 'Momen lapangan',
+    'littlebike.jpg': 'Arsip riding personal',
+    'batik-tni.jpg': 'Konteks klien institusi',
+    'produksi.jpg': 'Arah produksi',
+  },
+  en: {
+    'studio.jpg': 'Studio portrait',
+    'group.jpg': 'Community leadership',
+    'hero-helmet.jpg': 'Night ride',
+    'fatboy.jpg': 'Riding culture',
+    'tni.jpg': 'TNI AD field context',
+    'speaking.jpg': 'Event leadership',
+    'defence-field.jpg': 'Defence field work',
+    'nexin.jpg': 'Nexin work context',
+    'radar.jpg': 'Radar and defence technology',
+    'secuan.jpg': 'Kawan Secuan team',
+    'night-event.jpg': 'Event coordination',
+    'patch.jpg': 'Community identity',
+    'forest.jpg': 'Candid moment',
+    'littlebike.jpg': 'Personal riding archive',
+    'batik-tni.jpg': 'Institutional client context',
+    'produksi.jpg': 'Production direction',
+  },
+};
+
+const galleryOrder = [
+  'tni.jpg',
+  'studio.jpg',
+  'defence-field.jpg',
+  'group.jpg',
+  'radar.jpg',
+  'speaking.jpg',
+  'secuan.jpg',
+  'nexin.jpg',
+  'batik-tni.jpg',
+  'night-event.jpg',
+  'produksi.jpg',
+  'patch.jpg',
+  'fatboy.jpg',
+  'hero-helmet.jpg',
+  'littlebike.jpg',
+  'forest.jpg',
+];
+
+const featuredEvidence = new Set(['tni.jpg', 'defence-field.jpg', 'radar.jpg']);
+
+function useScrambleName(target: string) {
+  const [display, setDisplay] = useState(target);
+  const ran = useRef(false);
+
+  useEffect(() => {
+    if (ran.current) return;
+    ran.current = true;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      setDisplay(target);
+      return;
+    }
+
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&';
+    const duration = 800;
+    const start = performance.now();
+    let frame: number;
+
+    function tick(now: number) {
+      const progress = Math.min(1, (now - start) / duration);
+      const revealCount = Math.floor(progress * target.length);
+      let out = '';
+      for (let i = 0; i < target.length; i += 1) {
+        const ch = target[i];
+        if (ch === ' ' || i < revealCount) {
+          out += ch;
+        } else {
+          out += chars[Math.floor(Math.random() * chars.length)];
+        }
+      }
+      setDisplay(out);
+      if (progress < 1) {
+        frame = requestAnimationFrame(tick);
+      } else {
+        setDisplay(target);
+      }
+    }
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [target]);
+
+  return display;
+}
 
 export default function HomeExperience({ locale }: { locale: Locale }) {
   const t = content[locale];
-  const visibleGallery = t.gallery.slice(0, 6);
-  const hiddenGallery = t.gallery.slice(6);
+  const decryptedName = useScrambleName(t.title);
+
   const localizedCompanies = profileCompanies.map((company) => ({
     code: company.code,
     name: company.name,
@@ -385,7 +301,18 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
     name: work.name,
     description: work.description,
     role: work.role,
+    kind: work.kind,
   }));
+  const galleryItems: LightboxItem[] = galleryOrder.map((file, index) => ({
+    src: `/assets/g/${file}`,
+    code: `EV-${String(index + 1).padStart(3, '0')}`,
+    label: galleryLabels[locale][file],
+  }));
+
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
+
   const pageUrl = locale === 'en' ? `${canonicalBaseUrl}/en` : canonicalBaseUrl;
   const personId = `${canonicalBaseUrl}/#person`;
   const websiteId = `${canonicalBaseUrl}/#website`;
@@ -431,9 +358,7 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         alternateName: 'Galang Kharisma Rizki',
         url: canonicalBaseUrl,
         inLanguage: locale === 'en' ? 'en' : 'id',
-        publisher: {
-          '@id': personId,
-        },
+        publisher: { '@id': personId },
       },
       {
         '@type': 'ProfilePage',
@@ -441,319 +366,394 @@ export default function HomeExperience({ locale }: { locale: Locale }) {
         name: t.title,
         url: pageUrl,
         inLanguage: locale === 'en' ? 'en' : 'id',
-        isPartOf: {
-          '@id': websiteId,
-        },
-        about: {
-          '@id': personId,
-        },
-        mainEntity: {
-          '@id': personId,
-        },
-        hasPart: {
-          '@id': `${pageUrl}#selected-ventures`,
-        },
-        primaryImageOfPage: {
-          '@type': 'ImageObject',
-          url: `${canonicalBaseUrl}/assets/g/studio.jpg`,
-        },
+        isPartOf: { '@id': websiteId },
+        about: { '@id': personId },
+        mainEntity: { '@id': personId },
+        hasPart: { '@id': `${pageUrl}#selected-ventures` },
+        primaryImageOfPage: { '@type': 'ImageObject', url: `${canonicalBaseUrl}/assets/g/studio.jpg` },
       },
       personSchema,
       selectedVenturesSchema,
     ],
   };
 
+  useEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const cleanupFns: Array<() => void> = [];
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    if (rootRef.current) {
+      if (!reduced) {
+        const lenis = new Lenis({ duration: 1.05, smoothWheel: true });
+        lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenis.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+        cleanupFns.push(() => lenis.destroy());
+      }
+
+      const ctx = gsap.context(() => {
+        // metric count-up
+        document.querySelectorAll<HTMLElement>('[data-metric-value]').forEach((el) => {
+          const target = Number(el.dataset.metricValue);
+          const suffix = el.dataset.metricSuffix ?? '';
+          const counter = { value: 0 };
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+              gsap.to(counter, {
+                value: target,
+                duration: reduced ? 0 : 1.1,
+                ease: 'power2.out',
+                onUpdate: () => {
+                  el.textContent = `${Math.round(counter.value)}${suffix}`;
+                },
+              });
+            },
+          });
+        });
+
+        // method connecting line draw
+        const methodLine = document.querySelector<HTMLElement>('[data-method-line]');
+        if (methodLine) {
+          gsap.fromTo(
+            methodLine,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: '[data-method-track]',
+                start: 'top 70%',
+                end: 'bottom 60%',
+                scrub: reduced ? false : 0.6,
+              },
+            }
+          );
+        }
+
+        // timeline progress line + active dimming
+        const timelineTrack = document.querySelector<HTMLElement>('[data-timeline-track]');
+        const timelineLine = document.querySelector<HTMLElement>('[data-timeline-line]');
+        if (timelineTrack && timelineLine) {
+          gsap.fromTo(
+            timelineLine,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: timelineTrack,
+                start: 'top 65%',
+                end: 'bottom 65%',
+                scrub: reduced ? false : 0.6,
+              },
+            }
+          );
+        }
+        document.querySelectorAll<HTMLElement>('[data-timeline-entry]').forEach((entry) => {
+          ScrollTrigger.create({
+            trigger: entry,
+            start: 'top 65%',
+            end: 'bottom 35%',
+            onEnter: () => entry.classList.add('is-active'),
+            onLeave: () => entry.classList.remove('is-active'),
+            onEnterBack: () => entry.classList.add('is-active'),
+            onLeaveBack: () => entry.classList.remove('is-active'),
+          });
+        });
+
+        // evidence reveal
+        document.querySelectorAll<HTMLElement>('[data-evidence-item]').forEach((el, index) => {
+          gsap.fromTo(
+            el,
+            { autoAlpha: 0, y: 28, clipPath: 'inset(12% 0 12% 0)' },
+            {
+              autoAlpha: 1,
+              y: 0,
+              clipPath: 'inset(0% 0 0% 0)',
+              duration: reduced ? 0.2 : 0.7,
+              delay: reduced ? 0 : (index % 4) * 0.05,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 90%', once: true },
+            }
+          );
+        });
+
+        // section headings soft reveal
+        document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+          gsap.fromTo(
+            el,
+            { autoAlpha: 0, y: 18 },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: reduced ? 0.2 : 0.6,
+              ease: 'power2.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+            }
+          );
+        });
+      }, rootRef);
+
+      cleanupFns.push(() => ctx.revert());
+    }
+
+    return () => {
+      cleanupFns.forEach((fn) => fn());
+    };
+  }, []);
+
+  function handleVenturePointerMove(e: React.MouseEvent<HTMLAnchorElement>, kind: string) {
+    if (!previewRef.current) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    const rect = rootRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    previewRef.current.style.backgroundImage = `url(${ventureThumb[kind]})`;
+    previewRef.current.style.transform = `translate(${e.clientX - rect.left + 24}px, ${e.clientY - rect.top - 90}px)`;
+    previewRef.current.style.opacity = '1';
+  }
+  function handleVentureLeave() {
+    if (!previewRef.current) return;
+    previewRef.current.style.opacity = '0';
+  }
+
   return (
-    <main className="executive-site">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
-      <header className="topbar" aria-label="Primary navigation">
-          <a className="brand-mark" href="#top" aria-label="Galang Kharisma Rizki home">GKR</a>
-        <nav className="nav-links">
-          {t.nav.map((item) => (
-            <a href={item.href} key={item.href}>{item.label}</a>
-          ))}
-        </nav>
-        <details className="mobile-jump-menu">
-          <summary>Menu</summary>
-          <div>
-            <a href="#about">About</a>
-            <a href="#companies">Companies</a>
-            <a href="#journey">Journey</a>
-            <a href="#ventures">Ventures</a>
-            <a href="#contact">Contact</a>
-          </div>
-        </details>
-        <div className="lang-switch" aria-label="Language switcher">
-          <a className={locale === 'id' ? 'active' : ''} href="/">ID</a>
-          <a className={locale === 'en' ? 'active' : ''} href="/en">EN</a>
-        </div>
-      </header>
+    <div ref={rootRef} className="dossier-root">
+      <DossierIntro />
+      <main className="dossier">
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
 
-      <section className="hero-v2" id="top">
-        <div className="hero-copy">
-          <p className="eyebrow">{t.eyebrow}</p>
-          <h1>{t.title}</h1>
-          <p className="hero-thesis">{t.thesis}</p>
-          <div className="hero-actions" aria-label="Primary actions">
-            <a className="primary-cta" href="#contact">{t.primaryCta}</a>
-            <a className="secondary-cta" href="#companies">{t.secondaryCta}</a>
-          </div>
-        </div>
-
-        <figure className="hero-portrait">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/assets/g/studio.jpg"
-            alt="Galang Kharisma Rizki, S.H. portrait"
-            width="960"
-            height="1200"
-            loading="eager"
-            decoding="async"
-          />
-          <figcaption>
-            <span>{t.location}</span>
-            <span>{t.availability}</span>
-          </figcaption>
-        </figure>
-      </section>
-
-      <section className="thesis-band" aria-label="Positioning statement">
-        <p>{t.statement}</p>
-      </section>
-
-      <section className="metric-grid" id="about" aria-label="Official profile and career proof metrics">
-        {t.metrics.map((metric) => (
-          <div className="metric" key={metric.value}>
-            <strong>{metric.value}</strong>
-            <span>{metric.label}</span>
-          </div>
-        ))}
-      </section>
-
-      <section className="section-block operating-system">
-        <div className="section-heading">
-          <p className="eyebrow">{t.operatingEyebrow}</p>
-          <h2>{t.operatingTitle}</h2>
-        </div>
-        <div className="principle-grid">
-          {t.principles.map((item, index) => (
-            <article className="principle" key={item.title}>
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="section-block companies-block" id="companies">
-        <div className="section-heading">
-          <p className="eyebrow">{t.companiesEyebrow}</p>
-          <h2>{t.companiesTitle}</h2>
-        </div>
-        <div className="company-list">
-          {localizedCompanies.map((company) => (
-            <article className="company-row" key={company.code}>
-              <span className="company-code">{company.code}</span>
-              <div>
-                <h3>{company.name}</h3>
-                <p className="role">{company.role}</p>
+        <header className="topbar">
+          <a className="brand-mark" href="#top" aria-label="GKR — Galang Kharisma Rizki home">GKR</a>
+          <nav className="nav-links">
+            {t.nav.map((item) => (
+              <a href={item.href} key={item.href}>{item.label}</a>
+            ))}
+          </nav>
+          <details className="mobile-jump-menu">
+            <summary>Menu</summary>
+            <div>
+              {t.nav.map((item) => (
+                <a href={item.href} key={item.href}>{item.label}</a>
+              ))}
+              <div className="mobile-menu-cta">
+                <a className="primary-cta" href="#contact">{t.primaryCta}</a>
               </div>
-              <div>
-                <p>{company.focus}</p>
-                <ul className="company-scope" aria-label={`${company.name} portfolio scope`}>
-                  {company.scope.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="mobile-company-list">
-          {localizedCompanies.map((company, index) => (
-            <details className="mobile-company-item" key={company.code} open={index === 0}>
-              <summary>
-                <span className="company-code">{company.code}</span>
-                <span>
-                  <strong>{company.name}</strong>
-                  <small>{company.role}</small>
-                </span>
-              </summary>
-              <div className="mobile-company-panel">
-                <p>{company.focus}</p>
-                <ul className="company-scope compact" aria-label={`${company.name} primary scope`}>
-                  {company.scope.slice(0, 3).map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-                {company.scope.length > 3 ? (
-                  <details className="inline-more">
-                    <summary>Lihat selengkapnya</summary>
-                    <ul className="company-scope compact more" aria-label={`${company.name} additional scope`}>
-                      {company.scope.slice(3).map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ul>
-                  </details>
-                ) : null}
-              </div>
-            </details>
-          ))}
-        </div>
-      </section>
+            </div>
+          </details>
+          <div className="lang-switch" aria-label="Language switcher">
+            <a className={locale === 'id' ? 'active' : ''} href="/">ID</a>
+            <a className={locale === 'en' ? 'active' : ''} href="/en">EN</a>
+          </div>
+        </header>
 
-      <section className="section-block career-block" id="journey">
-        <div className="section-heading">
-          <p className="eyebrow">{t.careerEyebrow}</p>
-          <h2>{t.careerTitle}</h2>
-        </div>
-        <div className="timeline">
-          {localizedCareer.map((item) => (
-            <article className="timeline-row" key={item.period}>
-              <span>{item.period}</span>
-              <div>
+        {/* 01 — IDENTITAS */}
+        <section className="hero" id="top">
+          <div className="hero-frame-marks" aria-hidden="true">
+            <span /><span /><span /><span />
+          </div>
+          <div className="hero-copy">
+            <p className="eyebrow mono">{t.eyebrow}</p>
+            <h1 className="hero-name" aria-label={t.title}>{decryptedName}</h1>
+            <p className="hero-thesis">{t.thesis}</p>
+            <div className="hero-actions">
+              <a className="primary-cta" href="#contact">{t.primaryCta}</a>
+              <a className="secondary-cta" href="#companies">{t.secondaryCta}</a>
+            </div>
+          </div>
+
+          <figure className="hero-portrait">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/g/studio.jpg"
+              alt="Galang Kharisma Rizki, S.H. portrait"
+              width="960"
+              height="1200"
+              loading="eager"
+              decoding="async"
+            />
+            <div className="hero-portrait-meta mono">
+              <span>{t.coordinates}</span>
+              <span>{t.subjectLabel}</span>
+              <span className="hero-status"><i /> {t.availability}</span>
+            </div>
+            <figcaption className="mono">{t.location}</figcaption>
+          </figure>
+        </section>
+
+        {/* 02 — PROFIL SUBJEK */}
+        <section className="profile" id="about" aria-label="Positioning statement and metrics">
+          <p className="profile-statement" data-reveal>{t.statement}</p>
+          <div className="metric-row">
+            {t.metrics.map((metric) => (
+              <div className="metric" key={metric.label}>
+                <strong data-metric-value={metric.value} data-metric-suffix={metric.suffix}>0{metric.suffix}</strong>
+                <span className="mono">{metric.label}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 03 — METODE */}
+        <section className="method">
+          <div className="section-heading" data-reveal>
+            <p className="eyebrow mono">{t.operatingEyebrow}</p>
+            <h2>{t.operatingTitle}</h2>
+          </div>
+          <div className="method-track" data-method-track>
+            <div className="method-line-rail" aria-hidden="true">
+              <span className="method-line-fill" data-method-line />
+            </div>
+            {t.principles.map((item, index) => (
+              <article className="method-step" key={item.title} data-reveal>
+                <span className="method-index mono">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{item.title}</h3>
                 <p>{item.text}</p>
-                <ul className="role-stack" aria-label={`${item.title} roles`}>
-                  {item.roles.map((role) => (
-                    <li key={role}>{role}</li>
-                  ))}
-                </ul>
-              </div>
-            </article>
-          ))}
-        </div>
-        <div className="mobile-timeline">
-          {localizedCareer.map((item, index) => (
-            <details className="mobile-timeline-item" key={item.period} open={index === 0}>
-              <summary>
-                <span>{item.period}</span>
-                <strong>{item.title}</strong>
-              </summary>
-              <p>{item.text}</p>
-              <ul className="role-stack compact" aria-label={`${item.title} key roles`}>
-                {item.roles.slice(0, 2).map((role) => (
-                  <li key={role}>{role}</li>
-                ))}
-              </ul>
-              {item.roles.length > 2 ? (
-                <details className="inline-more">
-                  <summary>+ lainnya</summary>
-                  <ul className="role-stack compact more" aria-label={`${item.title} additional roles`}>
-                    {item.roles.slice(2).map((role) => (
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* 04 — ENTITAS */}
+        <section className="entities" id="companies">
+          <div className="section-heading" data-reveal>
+            <p className="eyebrow mono">{t.companiesEyebrow}</p>
+            <h2>{t.companiesTitle}</h2>
+          </div>
+          <div className="entity-ledger">
+            {localizedCompanies.map((company) => (
+              <details className="entity-row" key={company.code}>
+                <summary data-reveal>
+                  <span className="entity-monogram mono">{company.code}</span>
+                  <span className="entity-heading">
+                    <h3>{company.name}</h3>
+                    <em>{company.role}</em>
+                  </span>
+                  <span className="entity-chevron mono" aria-hidden="true">＋</span>
+                </summary>
+                <div className="entity-body">
+                  <p>{company.focus}</p>
+                  <ol className="entity-spec mono">
+                    {company.scope.map((item, i) => (
+                      <li key={item}>
+                        <span>{String(i + 1).padStart(2, '0')}.</span> {item}
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        {/* 05 — LINIMASA */}
+        <section className="timeline-dossier" id="journey">
+          <div className="section-heading" data-reveal>
+            <p className="eyebrow mono">{t.careerEyebrow}</p>
+            <h2>{t.careerTitle}</h2>
+          </div>
+          <div className="timeline-track" data-timeline-track>
+            <div className="timeline-rail" aria-hidden="true">
+              <span className="timeline-rail-fill" data-timeline-line />
+            </div>
+            {localizedCareer.map((item) => (
+              <article className="timeline-entry" key={item.period} data-timeline-entry>
+                <span className="timeline-year mono">{item.period}</span>
+                <div className="timeline-body">
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <ul className="timeline-roles mono">
+                    {item.roles.map((role) => (
                       <li key={role}>{role}</li>
                     ))}
                   </ul>
-                </details>
-              ) : null}
-            </details>
-          ))}
-        </div>
-      </section>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
-      <section className="section-block work-block" id="ventures">
-        <div className="section-heading split">
-          <div>
-            <p className="eyebrow">{t.workEyebrow}</p>
+        {/* 06 — VENTURES */}
+        <section className="ventures-editorial" id="ventures">
+          <div className="section-heading" data-reveal>
+            <p className="eyebrow mono">{t.workEyebrow}</p>
             <h2>{t.workTitle}</h2>
           </div>
-        </div>
-        <div className="work-grid">
-          {localizedWork.map((item) => (
-            <a className="work-card" href={item.href} target="_blank" rel="noopener noreferrer" key={item.href}>
-              <span className="venture-domain">{item.domain}</span>
-              <span className="venture-category">{item.category}</span>
-              <h3>{item.name}</h3>
-              <p>{item.description}</p>
-              <div className="venture-card-footer">
-                <span>{item.role}</span>
-                <span className="venture-visit" aria-hidden="true">VISIT WEBSITE ↗</span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
+          <div className="venture-list">
+            {localizedWork.map((item) => (
+              <a
+                className="venture-row"
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={item.href}
+                onMouseMove={(e) => handleVenturePointerMove(e, item.kind)}
+                onMouseLeave={handleVentureLeave}
+              >
+                <span className="venture-name">{item.name}</span>
+                <span className="venture-meta">
+                  <span className="venture-description">{item.description}</span>
+                  <span className="venture-visit mono">{t.visitLabel} <i>↗</i></span>
+                </span>
+              </a>
+            ))}
+          </div>
+          <div ref={previewRef} className="venture-preview" aria-hidden="true" />
+        </section>
 
-      <section className="section-block evidence-block" aria-label="Visual evidence">
-        <div className="section-heading">
-          <p className="eyebrow">{t.evidenceEyebrow}</p>
-          <h2>{t.evidenceTitle}</h2>
-        </div>
-        <div className="evidence-grid">
-          {t.gallery.map((item) => (
-            <figure key={item.src}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.src}
-                alt={`${item.label} - Galang Kharisma Rizki portfolio`}
-                width="800"
-                height="600"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>{item.label}</figcaption>
-            </figure>
-          ))}
-        </div>
-        <div className="mobile-evidence-grid">
-          {visibleGallery.map((item) => (
-            <figure key={item.src}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.src}
-                alt={`${item.label} - Galang Kharisma Rizki portfolio`}
-                width="800"
-                height="600"
-                loading="lazy"
-                decoding="async"
-              />
-              <figcaption>{item.label}</figcaption>
-            </figure>
-          ))}
-        </div>
-        {hiddenGallery.length ? (
-          <details className="mobile-gallery-more">
-            <summary>Lihat semua dokumentasi</summary>
-            <div className="mobile-evidence-grid more">
-              {hiddenGallery.map((item) => (
-                <figure key={item.src}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={item.src}
-                    alt={`${item.label} - Galang Kharisma Rizki portfolio`}
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <figcaption>{item.label}</figcaption>
-                </figure>
-              ))}
-            </div>
-          </details>
-        ) : null}
-      </section>
+        {/* 07 — FIELD EVIDENCE */}
+        <section className="evidence" aria-label="Visual evidence">
+          <div className="section-heading" data-reveal>
+            <p className="eyebrow mono">{t.evidenceEyebrow}</p>
+            <h2>{t.evidenceTitle}</h2>
+          </div>
+          <div className="evidence-grid">
+            {galleryItems.map((item, index) => (
+              <button
+                type="button"
+                key={item.src}
+                className={`evidence-item${featuredEvidence.has(item.src.split('/').pop() ?? '') ? ' is-featured' : ''}`}
+                data-evidence-item
+                onClick={() => setLightboxIndex(index)}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={item.src} alt={`${item.label} — Galang Kharisma Rizki portfolio`} loading="lazy" decoding="async" />
+                <span className="evidence-view mono">{t.viewLabel}</span>
+                <span className="evidence-caption mono">
+                  <b>{item.code}</b> {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
+        </section>
 
-      <section className="final-cta" id="contact">
-        <div>
-          <p className="eyebrow">{t.contactEyebrow}</p>
-          <h2>{t.contactTitle}</h2>
-        </div>
-        <div className="contact-actions">
-          <a className="primary-cta" href={`mailto:${contact.email}`}>{t.emailCta}</a>
-          <a className="secondary-cta" href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer">{t.whatsappCta}</a>
-        </div>
-      </section>
+        {/* 08 — PENUTUP */}
+        <section className="closing" id="contact">
+          <p className="eyebrow mono">{t.contactEyebrow}</p>
+          <h2 data-reveal>{t.contactTitle}</h2>
+          <span className="stamp" aria-hidden="true">{t.stampEngagement}</span>
+          <div className="contact-actions">
+            <a className="primary-cta" href={`mailto:${contact.email}`}>{t.emailCta}</a>
+            <a className="secondary-cta" href={contact.whatsappUrl} target="_blank" rel="noopener noreferrer">{t.whatsappCta}</a>
+          </div>
+        </section>
 
-      <footer className="site-footer">
-        <span>{t.footerLeft}</span>
-        <a className="back-to-top" href="#top">Back to top</a>
-        <span>{t.footerRight}</span>
-      </footer>
-    </main>
+        <footer className="site-footer mono">
+          <span>{t.footerLeft}</span>
+          <a className="back-to-top" href="#top">{t.footerDossier}</a>
+          <span>{t.footerRight}</span>
+        </footer>
+      </main>
+
+      <Lightbox
+        items={galleryItems}
+        activeIndex={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={(i) => setLightboxIndex(i)}
+      />
+    </div>
   );
 }
